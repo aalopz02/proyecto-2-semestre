@@ -1,6 +1,6 @@
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-class crearjson {
+class crearJson {
     private JSONObject caracteristica = new JSONObject();
     private JSONObject contenido = new JSONObject();
     private String nombre;
@@ -24,9 +24,7 @@ class crearjson {
         arreglo.add(tipodat);
         arreglo.add(dato);
         contenido.put(nombredat,arreglo);
-        System.out.println(contenido);
         caracteristica.put(nombre,contenido);
-        System.out.println(caracteristica);
         return caracteristica;
     }
 
