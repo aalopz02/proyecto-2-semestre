@@ -21,7 +21,7 @@ public class escribirJson {
         System.out.println("Digite el tipo del dato: ");
         String tipodat = entradas.next();
         archivo.settipodat(tipodat);
-        System.out.println("Digite el dato: ");
+        System.out.println("Digite el dato: ");a
         String dato = entradas.next();
         archivo.setdato(dato);
         escribirJson(nombre,archivo);
