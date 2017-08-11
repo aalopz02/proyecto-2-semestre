@@ -19,7 +19,7 @@ class crearjson {
     protected void setdato(String dato){
         this.dato = dato;
     }
-    protected void escribirJson(){
+    protected Object escribirJson(){
         JSONArray arreglo = new JSONArray();
         arreglo.add(tipodat);
         arreglo.add(dato);
@@ -27,6 +27,7 @@ class crearjson {
         System.out.println(contenido);
         caracteristica.put(nombre,contenido);
         System.out.println(caracteristica);
+        return caracteristica;
     }
 
 }
