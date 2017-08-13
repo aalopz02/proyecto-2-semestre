@@ -3,20 +3,10 @@ import java.io.IOException;
 import java.util.Scanner;
 public class escribirJson {
     public static void main(String[] args) {
-        Scanner entradas = new Scanner(System.in);
         crearJson archivo = new crearJson();
-        System.out.println("Digite el nombre del archivo: ");
-        String nombre = entradas.next();
+        String nombre = "Persona";
         archivo.setnombre(nombre);
-        System.out.println("Digite el nombre del dato: ");
-        String nombredat = entradas.next();
-        archivo.setnombredat(nombredat);
-        System.out.println("Digite el tipo del dato: ");
-        String tipodat = entradas.next();
-        archivo.settipodat(tipodat);
-        System.out.println("Digite el dato: ");
-        String dato = entradas.next();
-        archivo.setdato(dato);
+        archivo.setcantidad(2);
         escribirJson(nombre, archivo);
     }
     protected static void escribirJson(String dato, crearJson archivo) {
