@@ -28,10 +28,20 @@ public class main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         primaryStage.setTitle("LinkedDB");
-        BorderPane root  = new BorderPane();
+        BorderPane root  = new BorderPane(crearCuadros(root));
         Scene scene = new Scene(root, 1000, 850, Color.WHITE);
+        crearMenus(root);
+        crearCuadros(root);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+    public static ScrollPane crearCuadros(BorderPane root){
+        ScrollPane cuadroEditor = new ScrollPane();
+        cuadroEditor.setSize(250,350);
+
+    }
+    public static void crearMenus(BorderPane root){
         MenuBar menuArriba = new MenuBar();
-        menuArriba.prefWidthProperty().bind(primaryStage.widthProperty());
         root.setTop(menuArriba);
         Menu menuArchivo = new Menu("Archivo");
         MenuItem subMenuNuevo = new MenuItem( "Nuevo");
@@ -53,11 +63,7 @@ public class main extends Application {
         MenuItem subMenuAyuda = new MenuItem("Ayuda");
         menuAyuda.getItems().addAll(subMenuAyuda);
         menuArriba.getMenus().addAll(menuArchivo,menuVer,menuAyuda);
-        primaryStage.setScene(scene);
-        primaryStage.show();
     }
-
-
     public static void main(String[] args) {
         launch(args);
     }
