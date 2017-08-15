@@ -15,7 +15,7 @@ public class escribirJson {
 
     protected static void escribirJson(String dato, crearJson archivo) {
 
-        try (FileWriter file = new FileWriter("C:/Users/Andres/IdeaProjects/proyecto/src/datos/" + dato + ".json")) {
+        try (FileWriter file = new FileWriter("./src/datos/" + dato + ".json")) {
             file.write(archivo.escribirJson().toString());
             System.out.println("Successfully Copied JSON Object to File...");
             System.out.println("\nJSON Object: " + archivo.escribirJson());

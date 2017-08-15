@@ -39,7 +39,7 @@ public class main extends Application {
         primaryStage.show();
     }
     public static void crearArbolDocumentos(GridPane grid,BorderPane root){
-        TreeItem<String> rootArchivo = new TreeItem<>("Archivos");
+            TreeItem<String> rootArchivo = new TreeItem<>("Archivos");
         rootArchivo.setExpanded(true);
         for (int i = 0;i < 3;i++){
             TreeItem<String> ramaArchivo = new TreeItem<>("NombreArchivo");
