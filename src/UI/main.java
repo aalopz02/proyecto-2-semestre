@@ -4,19 +4,19 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.Menu;
-import javafx.scene.control.SeparatorMenuItem;
 import javafx.application.Platform;
-import javafx.scene.control.CheckMenuItem;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.RadioMenuItem;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -28,21 +28,42 @@ public class main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         primaryStage.setTitle("LinkedDB");
-        BorderPane root  = new BorderPane(crearCuadros(root));
+        BorderPane root  = new BorderPane();
+        GridPane grid = new GridPane();
         Scene scene = new Scene(root, 1000, 850, Color.WHITE);
-        crearMenus(root);
-        crearCuadros(root);
+        crearMenus(grid,root);
+        crearEtiquetas(grid,root);
+        crearArbolDocumentos(grid,root);
+        root.setCenter(grid);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-    public static ScrollPane crearCuadros(BorderPane root){
-        ScrollPane cuadroEditor = new ScrollPane();
-        cuadroEditor.setSize(250,350);
+    public static void crearArbolDocumentos(GridPane grid,BorderPane root){
+        TreeItem<String> rootArchivo = new TreeItem<>();
+        //javafx.scene.control.TreeItem<String> rootArchivo = new javafx.scene.control.TreeItem<>("Archivo");
+        //Esta definicion la hice asi porque con las etiquetas me daba el mismo problema, a esas le puse la
+        // direccion completa y sirvieron, pero aca no
+        rootArchivo.setExpanded(true);
+        TreeItem<String> ramaCaracteristica = new TreeItem<>("Caracteristica");
+        rootArchivo.getChildren().add(ramaCaracteristica);
+        ramaCaracteristica = new TreeItem<>("Caracteristica");
+        rootArchivo.getChildren().add(ramaCaracteristica);
+        //Ninguna de las dos formas me funcionan
+        grid.add(rootArchivo,0,2);
+        //root.getChildren().addAll(rootArchivo);
 
     }
-    public static void crearMenus(BorderPane root){
+    public static void crearEtiquetas(GridPane grid, BorderPane root){
+        javafx.scene.control.Label documentos = new javafx.scene.control.Label();
+        documentos.setText("              Documentos");
+        grid.add(documentos,0,1);
+        javafx.scene.control.Label movimientos = new javafx.scene.control.Label();
+        movimientos.setText("Cambios");
+        grid.add(movimientos,0,3);
+
+    }
+    public static void crearMenus(GridPane grid,BorderPane root){
         MenuBar menuArriba = new MenuBar();
-        root.setTop(menuArriba);
         Menu menuArchivo = new Menu("Archivo");
         MenuItem subMenuNuevo = new MenuItem( "Nuevo");
         subMenuNuevo.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.SHORTCUT_DOWN));
@@ -63,6 +84,7 @@ public class main extends Application {
         MenuItem subMenuAyuda = new MenuItem("Ayuda");
         menuAyuda.getItems().addAll(subMenuAyuda);
         menuArriba.getMenus().addAll(menuArchivo,menuVer,menuAyuda);
+        root.setTop(menuArriba);
     }
     public static void main(String[] args) {
         launch(args);
