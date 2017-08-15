@@ -10,7 +10,7 @@ public class crearJson {
     private JSONArray contenido = new JSONArray();
     private String nombre;
     private int cantidad;
-    Scanner entradas = new Scanner(System.in);
+    private Scanner entradas = new Scanner(System.in);
 
     protected void setnombre(String nombre){
 

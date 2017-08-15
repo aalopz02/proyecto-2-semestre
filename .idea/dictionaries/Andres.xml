@@ -2,7 +2,13 @@
   <dictionary name="Andres">
     <words>
       <w>aplicacion</w>
+      <w>cantidad</w>
+      <w>caracteristica</w>
+      <w>contenido</w>
+      <w>entradas</w>
       <w>interfaz</w>
+      <w>nombre</w>
+      <w>setdato</w>
     </words>
   </dictionary>
 </component>

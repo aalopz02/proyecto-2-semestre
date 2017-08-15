@@ -39,18 +39,23 @@ public class main extends Application {
         primaryStage.show();
     }
     public static void crearArbolDocumentos(GridPane grid,BorderPane root){
-        TreeItem<String> rootArchivo = new TreeItem<>();
-        //javafx.scene.control.TreeItem<String> rootArchivo = new javafx.scene.control.TreeItem<>("Archivo");
-        //Esta definicion la hice asi porque con las etiquetas me daba el mismo problema, a esas le puse la
-        // direccion completa y sirvieron, pero aca no
+        TreeItem<String> rootArchivo = new TreeItem<>("Archivos");
         rootArchivo.setExpanded(true);
-        TreeItem<String> ramaCaracteristica = new TreeItem<>("Caracteristica");
-        rootArchivo.getChildren().add(ramaCaracteristica);
-        ramaCaracteristica = new TreeItem<>("Caracteristica");
-        rootArchivo.getChildren().add(ramaCaracteristica);
-        //Ninguna de las dos formas me funcionan
-        grid.add(rootArchivo,0,2);
-        //root.getChildren().addAll(rootArchivo);
+        for (int i = 0;i < 3;i++){
+            TreeItem<String> ramaArchivo = new TreeItem<>("NombreArchivo");
+            ramaArchivo.setExpanded(true);
+            rootArchivo.getChildren().add(ramaArchivo);
+
+            TreeItem<String> ramaCaracteristica = new TreeItem<>("Caracteristica");
+            ramaCaracteristica.setExpanded(true);
+            ramaArchivo.getChildren().add(ramaCaracteristica);
+
+            TreeItem<String> leafDato = new TreeItem<>("Dato");
+            leafDato.setExpanded(false);
+            ramaCaracteristica.getChildren().add(leafDato);
+        }
+        TreeView<String> tree = new TreeView<>(rootArchivo);
+        grid.add(tree,0,2);
 
     }
     public static void crearEtiquetas(GridPane grid, BorderPane root){
