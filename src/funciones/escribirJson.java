@@ -5,14 +5,6 @@ import java.io.IOException;
 
 public class escribirJson {
 
-    public void main(String[] args) {
-        crearJson archivo = new crearJson();
-        String nombre = "Persona";
-        archivo.setnombre(nombre);
-        archivo.setcantidad(2);
-        escribirJson(nombre, archivo);
-    }
-
     protected static void escribirJson(String dato, crearJson archivo) {
 
         try (FileWriter file = new FileWriter("./src/datos/" + dato + ".json")) {

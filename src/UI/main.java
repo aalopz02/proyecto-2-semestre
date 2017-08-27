@@ -20,8 +20,11 @@ import javafx.application.Platform;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import funciones.leerIniciales;
+import funciones.leerJson;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class main extends Application {
 
@@ -41,18 +44,26 @@ public class main extends Application {
     public static void crearArbolDocumentos(GridPane grid,BorderPane root){
             TreeItem<String> rootArchivo = new TreeItem<>("Archivos");
         rootArchivo.setExpanded(true);
-        for (int i = 0;i < 3;i++){
-            TreeItem<String> ramaArchivo = new TreeItem<>("NombreArchivo");
+        leerIniciales archivos = new leerIniciales();
+        ArrayList listaArchivos = (ArrayList) archivos.leerArchivos();
+        leerJson lecturaJson = new leerJson();
+        for (int i = 0;i < listaArchivos.size();i++){
+            String nomArchivo = (String) listaArchivos.get(i).toString().replace(".json","");
+            TreeItem<String> ramaArchivo = new TreeItem<>(nomArchivo);
             ramaArchivo.setExpanded(true);
             rootArchivo.getChildren().add(ramaArchivo);
+            for (int j = 0;j<lecturaJson.leerNombres(nomArchivo).size();j++){
+                String llave = lecturaJson.leerLlave(nomArchivo,j).toString();
+                TreeItem<String> ramaCaracteristica = new TreeItem<>(llave.replace("[","").replace("]",""));
+                ramaCaracteristica.setExpanded(true);
+                ramaArchivo.getChildren().add(ramaCaracteristica);
 
-            TreeItem<String> ramaCaracteristica = new TreeItem<>("Caracteristica");
-            ramaCaracteristica.setExpanded(true);
-            ramaArchivo.getChildren().add(ramaCaracteristica);
+                String caracteristica = lecturaJson.leerCaracteristicas(nomArchivo,j);
+                TreeItem<String> leafDato = new TreeItem<>(caracteristica);
+                leafDato.setExpanded(false);
+                ramaCaracteristica.getChildren().add(leafDato);
+            }
 
-            TreeItem<String> leafDato = new TreeItem<>("Dato");
-            leafDato.setExpanded(false);
-            ramaCaracteristica.getChildren().add(leafDato);
         }
         TreeView<String> tree = new TreeView<>(rootArchivo);
         grid.add(tree,0,2);
