@@ -21,12 +21,14 @@ public class leerJson {
         }
         return arregloCaracteristicas;
     }
+
     public static Set<String> leerLlave(String nomArchivo, int indice){
         JSONArray listaCaracteristicas = leerNombres(nomArchivo);
         JSONObject objetoJson = (JSONObject) listaCaracteristicas.get(indice);
-        Set<String> llave = objetoJson.keySet();
-        return llave;
+        Set<String> llaveJson = objetoJson.keySet();
+        return llaveJson;
     }
+
     public static String leerCaracteristicas(String nomArchivo, int indice){
         JSONArray listaCaracteristicas = leerNombres(nomArchivo);
         JSONObject objetoJson = (JSONObject) listaCaracteristicas.get(indice);
@@ -36,4 +38,12 @@ public class leerJson {
         return (String) caracteristica.get(1);
     }
 
+    public static String leerTipo(String nomArchivo, int indice){
+        JSONArray listaCaracteristicas = leerNombres(nomArchivo);
+        JSONObject objetoJson = (JSONObject) listaCaracteristicas.get(indice);
+        Set<String> llave = leerLlave(nomArchivo,indice);
+        ArrayList caracteristica = (ArrayList) objetoJson.get(llave.toString().replace("]","").replace("[",""));
+
+        return (String) caracteristica.get(0);
+    }
 }

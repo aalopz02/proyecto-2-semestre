@@ -36,7 +36,7 @@ public class crearJson {
         return tipodat;
     }
 
-    protected String setdato(){
+    protected String setdato(String tipo){
 
         System.out.println("Digite el dato: ");
         String dato = entradas.next();
@@ -47,9 +47,9 @@ public class crearJson {
         while (cantidad > 0){
             JSONArray arreglo = new JSONArray();
             JSONObject datos = new JSONObject();
-            arreglo.add(settipodat());
-            arreglo.add(setdato());
             datos.put(setnombredat(),arreglo);
+            arreglo.add(settipodat());
+            arreglo.add(setdato(settipodat()));
             contenido.add(datos);
             cantidad = cantidad - 1;
         }
