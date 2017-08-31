@@ -25,6 +25,9 @@ import funciones.leerIniciales;
 import funciones.leerJson;
 import java.awt.*;
 import java.util.ArrayList;
+
+import com.sun.glass.events.MouseEvent;
+
 import static com.sun.org.apache.bcel.internal.util.SecuritySupport.getResourceAsStream;
 
 public class main extends Application {
@@ -40,6 +43,7 @@ public class main extends Application {
         crearMenus(grid,root);
         crearEtiquetas(grid,root);
         crearArbolDocumentos(grid,root);
+        crearTabla(grid,root);
         root.setCenter(grid);
         primaryStage.getIcons().add(icono);
         primaryStage.setScene(scene);
@@ -76,7 +80,7 @@ public class main extends Application {
 
     public static void crearEtiquetas(GridPane grid, BorderPane root){
         javafx.scene.control.Label documentos = new javafx.scene.control.Label();
-        documentos.setText("              Documentos");
+        documentos.setText("                            Documentos");
         grid.add(documentos,0,1);
         javafx.scene.control.Label movimientos = new javafx.scene.control.Label();
         movimientos.setText("Cambios");
@@ -109,6 +113,31 @@ public class main extends Application {
         root.setTop(menuArriba);
     }
 
+    public static void crearTabla(GridPane grid,BorderPane root){
+    	TableView<Void> tablaModificar = new TableView<>();
+    	tablaModificar.setPlaceholder(new javafx.scene.control.Label(""));
+    	TableColumn<Void, Void> columna1 = new TableColumn<>("Archivo");
+    	columna1.setMaxWidth(180);
+    	columna1.setMinWidth(180);
+    	TableColumn<Void, Void> columna2 = new TableColumn<>("Caracteristica");
+    	columna2.setMaxWidth(200);
+    	columna2.setMinWidth(200);
+    	TableColumn<Void, Void> columna3 = new TableColumn<>("Tipo");
+    	columna3.setMaxWidth(180);
+    	columna3.setMinWidth(180);
+    	TableColumn<Void, Void> columna4 = new TableColumn<>("Dato");
+    	columna4.setMaxWidth(205);
+    	columna4.setMinWidth(205);
+    	tablaModificar.getColumns().add(columna1);
+    	tablaModificar.getColumns().add(columna2);
+    	tablaModificar.getColumns().add(columna3);
+    	tablaModificar.getColumns().add(columna4);
+    	tablaModificar.setMinSize(765, 400);
+    	tablaModificar.setMaxSize(765, 400);
+    	grid.add(tablaModificar, 1, 2);
+    	
+    }
+    
     public static void main(String[] args) {
         launch(args);
     }
