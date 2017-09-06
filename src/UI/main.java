@@ -1,7 +1,9 @@
 package UI;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -9,12 +11,11 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCodeCombination;
-import javafx.scene.input.KeyCombination;
+import javafx.scene.input.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.application.Platform;
@@ -24,10 +25,8 @@ import javafx.stage.Stage;
 import funciones.leerIniciales;
 import funciones.leerJson;
 import java.awt.*;
+import java.awt.TextField;
 import java.util.ArrayList;
-
-import com.sun.glass.events.MouseEvent;
-
 import static com.sun.org.apache.bcel.internal.util.SecuritySupport.getResourceAsStream;
 
 public class main extends Application {
@@ -50,8 +49,9 @@ public class main extends Application {
         primaryStage.show();
     }
 
-    public static void crearArbolDocumentos(GridPane grid,BorderPane root){
-            TreeItem<String> rootArchivo = new TreeItem<>("Archivos");
+    private void crearArbolDocumentos(GridPane grid,BorderPane root){
+
+        TreeItem<String> rootArchivo = new TreeItem<>("Archivos");
         rootArchivo.setExpanded(false);
         leerIniciales archivos = new leerIniciales();
         ArrayList listaArchivos = (ArrayList) archivos.leerArchivos();
@@ -66,7 +66,6 @@ public class main extends Application {
                 TreeItem<String> ramaCaracteristica = new TreeItem<>(llave.replace("[","").replace("]",""));
                 ramaCaracteristica.setExpanded(false);
                 ramaArchivo.getChildren().add(ramaCaracteristica);
-
                 String caracteristica = lecturaJson.leerCaracteristicas(nomArchivo,j);
                 TreeItem<String> leafDato = new TreeItem<>(caracteristica);
                 ramaCaracteristica.getChildren().add(leafDato);
@@ -74,13 +73,30 @@ public class main extends Application {
 
         }
         TreeView<String> tree = new TreeView<>(rootArchivo);
+        tree.setContextMenu((ContextMenu) crearContextMenu());
+        //EventHandler<MouseEvent> mouseEventHandle = (MouseEvent event) -> {
+        //    handleMouseClicked(event, tree);
+        //};
+        //tree.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEventHandle);
         grid.add(tree,0,2);
 
     }
 
-    public static void crearEtiquetas(GridPane grid, BorderPane root){
+    private void handleMouseClicked(MouseEvent event, TreeView tree) {
+        Node node = event.getPickResult().getIntersectedNode();
+        if (node instanceof Text || (node instanceof TreeCell && ((TreeCell) node).getText() != null)) {
+            String name = (String) ((TreeItem) tree.getSelectionModel().getSelectedItem()).getValue();
+            if (name != "Archivos") {
+                if (event.getButton().equals(MouseButton.SECONDARY)) {
+                    System.out.println(name);
+                }
+            }
+        }
+    }
+
+    private void crearEtiquetas(GridPane grid, BorderPane root){
         javafx.scene.control.Label documentos = new javafx.scene.control.Label();
-        documentos.setText("                            Documentos");
+        documentos.setText("              Documentos");
         grid.add(documentos,0,1);
         javafx.scene.control.Label movimientos = new javafx.scene.control.Label();
         movimientos.setText("Cambios");
@@ -88,7 +104,7 @@ public class main extends Application {
 
     }
 
-    public static void crearMenus(GridPane grid,BorderPane root){
+    private void crearMenus(GridPane grid,BorderPane root){
         MenuBar menuArriba = new MenuBar();
         Menu menuArchivo = new Menu("Archivo");
         MenuItem subMenuNuevo = new MenuItem( "Nuevo");
@@ -113,31 +129,45 @@ public class main extends Application {
         root.setTop(menuArriba);
     }
 
-    public static void crearTabla(GridPane grid,BorderPane root){
-    	TableView<Void> tablaModificar = new TableView<>();
-    	tablaModificar.setPlaceholder(new javafx.scene.control.Label(""));
-    	TableColumn<Void, Void> columna1 = new TableColumn<>("Archivo");
-    	columna1.setMaxWidth(180);
-    	columna1.setMinWidth(180);
-    	TableColumn<Void, Void> columna2 = new TableColumn<>("Caracteristica");
-    	columna2.setMaxWidth(200);
-    	columna2.setMinWidth(200);
-    	TableColumn<Void, Void> columna3 = new TableColumn<>("Tipo");
-    	columna3.setMaxWidth(180);
-    	columna3.setMinWidth(180);
-    	TableColumn<Void, Void> columna4 = new TableColumn<>("Dato");
-    	columna4.setMaxWidth(205);
-    	columna4.setMinWidth(205);
-    	tablaModificar.getColumns().add(columna1);
-    	tablaModificar.getColumns().add(columna2);
-    	tablaModificar.getColumns().add(columna3);
-    	tablaModificar.getColumns().add(columna4);
-    	tablaModificar.setMinSize(765, 400);
-    	tablaModificar.setMaxSize(765, 400);
-    	grid.add(tablaModificar, 1, 2);
-    	
+    private void crearTabla(GridPane grid,BorderPane root){
+        TableView<Void> tablaModificar = new TableView<>();
+        tablaModificar.setPlaceholder(new javafx.scene.control.Label(""));
+        TableColumn<Void, Void> columna1 = new TableColumn<>("Archivo");
+        columna1.setMaxWidth(180);
+        columna1.setMinWidth(180);
+        TableColumn<Void, Void> columna2 = new TableColumn<>("Caracteristica");
+        columna2.setMaxWidth(200);
+        columna2.setMinWidth(200);
+        TableColumn<Void, Void> columna3 = new TableColumn<>("Tipo");
+        columna3.setMaxWidth(180);
+        columna3.setMinWidth(180);
+        TableColumn<Void, Void> columna4 = new TableColumn<>("Dato");
+        columna4.setMaxWidth(205);
+        columna4.setMinWidth(205);
+        tablaModificar.getColumns().add(columna1);
+        tablaModificar.getColumns().add(columna2);
+        tablaModificar.getColumns().add(columna3);
+        tablaModificar.getColumns().add(columna4);
+        tablaModificar.setMinSize(765, 400);
+        tablaModificar.setMaxSize(765, 400);
+        grid.add(tablaModificar, 1, 2);
+
     }
-    
+
+    private ContextMenu crearContextMenu(){
+
+        TextField campoTexto = new TextField();
+        ContextMenu contextMenu = new ContextMenu();
+        MenuItem subMenuDeshacer = new MenuItem( "Deshacer");
+        MenuItem subMenuRehacer = new MenuItem( "Rehacer");
+        MenuItem subMenuModificar = new MenuItem( "Modificar");
+        MenuItem subMenuNuevo = new MenuItem( "Nuevo");
+        MenuItem subMenuEliminar = new MenuItem( "Eliminar");
+        contextMenu.getItems().addAll(subMenuModificar,subMenuEliminar,subMenuNuevo,subMenuDeshacer,subMenuRehacer);
+
+        return contextMenu;
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
