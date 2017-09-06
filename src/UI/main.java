@@ -57,7 +57,7 @@ public class main extends Application {
         ArrayList listaArchivos = (ArrayList) archivos.leerArchivos();
         leerJson lecturaJson = new leerJson();
         for (int i = 0;i < listaArchivos.size();i++){
-            String nomArchivo = (String) listaArchivos.get(i).toString().replace(".json","");
+            String nomArchivo = listaArchivos.get(i).toString().replace(".json","");
             TreeItem<String> ramaArchivo = new TreeItem<>(nomArchivo);
             ramaArchivo.setExpanded(false);
             rootArchivo.getChildren().add(ramaArchivo);
@@ -73,25 +73,9 @@ public class main extends Application {
 
         }
         TreeView<String> tree = new TreeView<>(rootArchivo);
-        tree.setContextMenu((ContextMenu) crearContextMenu());
-        //EventHandler<MouseEvent> mouseEventHandle = (MouseEvent event) -> {
-        //    handleMouseClicked(event, tree);
-        //};
-        //tree.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEventHandle);
+        tree.setContextMenu((ContextMenu) crearContextMenu(tree));
         grid.add(tree,0,2);
 
-    }
-
-    private void handleMouseClicked(MouseEvent event, TreeView tree) {
-        Node node = event.getPickResult().getIntersectedNode();
-        if (node instanceof Text || (node instanceof TreeCell && ((TreeCell) node).getText() != null)) {
-            String name = (String) ((TreeItem) tree.getSelectionModel().getSelectedItem()).getValue();
-            if (name != "Archivos") {
-                if (event.getButton().equals(MouseButton.SECONDARY)) {
-                    System.out.println(name);
-                }
-            }
-        }
     }
 
     private void crearEtiquetas(GridPane grid, BorderPane root){
@@ -154,15 +138,15 @@ public class main extends Application {
 
     }
 
-    private ContextMenu crearContextMenu(){
-
-        TextField campoTexto = new TextField();
+    private ContextMenu crearContextMenu(TreeView tree){
+        
         ContextMenu contextMenu = new ContextMenu();
+        MenuItem subMenuModificar = new MenuItem( "Modificar");
+        subMenuModificar.setOnAction(action -> uiController.agregarValorTabla(tree));
+        MenuItem subMenuEliminar = new MenuItem( "Eliminar");
+        MenuItem subMenuNuevo = new MenuItem( "Nuevo");
         MenuItem subMenuDeshacer = new MenuItem( "Deshacer");
         MenuItem subMenuRehacer = new MenuItem( "Rehacer");
-        MenuItem subMenuModificar = new MenuItem( "Modificar");
-        MenuItem subMenuNuevo = new MenuItem( "Nuevo");
-        MenuItem subMenuEliminar = new MenuItem( "Eliminar");
         contextMenu.getItems().addAll(subMenuModificar,subMenuEliminar,subMenuNuevo,subMenuDeshacer,subMenuRehacer);
 
         return contextMenu;
