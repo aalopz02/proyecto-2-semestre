@@ -41,16 +41,5 @@ public class uiController {
 
     }
 
-    protected static void handleMouseClicked(MouseEvent event, TreeView tree) {
-        Node node = event.getPickResult().getIntersectedNode();
-        if (node instanceof Text || (node instanceof TreeCell && ((TreeCell) node).getText() != null)) {
-            String name = (String) ((TreeItem) tree.getSelectionModel().getSelectedItem()).getValue();
-            if (name != "Archivos") {
-                if (event.getButton().equals(MouseButton.SECONDARY)) {
-                    //main.crearContextMenu(tree,node);
-                }
-            }
-        }
-    }
 
 }
