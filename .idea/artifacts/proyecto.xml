@@ -1,0 +1,21 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" build-on-make="true" name="proyecto">
+    <output-path>$PROJECT_DIR$/out/artifacts/proyecto</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="UI.main" />
+        <option name="description" value="" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="nativeBundle" value="exe" />
+        <option name="title" value="LinkedBd" />
+        <option name="vendor" value="" />
+        <option name="version" value="" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="proyecto.jar">
+        <element id="module-output" name="proyecto" />
+      </element>
+    </root>
+  </artifact>
+</component>
