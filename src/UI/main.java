@@ -54,7 +54,7 @@ public class main extends Application {
         TreeItem<String> rootArchivo = new TreeItem<>("Archivos");
         rootArchivo.setExpanded(false);
         leerIniciales archivos = new leerIniciales();
-        ArrayList listaArchivos = (ArrayList) archivos.leerArchivos();
+        ArrayList<String> listaArchivos = (ArrayList<String>) archivos.leerArchivos();
         leerJson lecturaJson = new leerJson();
         for (int i = 0;i < listaArchivos.size();i++){
             String nomArchivo = listaArchivos.get(i).toString().replace(".json","");
@@ -138,13 +138,15 @@ public class main extends Application {
 
     }
 
-    private ContextMenu crearContextMenu(TreeView tree){
+    private ContextMenu crearContextMenu(TreeView<String> tree){
         
         ContextMenu contextMenu = new ContextMenu();
         MenuItem subMenuModificar = new MenuItem( "Modificar");
         subMenuModificar.setOnAction(action -> uiController.agregarValorTabla(tree));
         MenuItem subMenuEliminar = new MenuItem( "Eliminar");
+        subMenuEliminar.setOnAction(action -> uiController.eliminarValor(tree));
         MenuItem subMenuNuevo = new MenuItem( "Nuevo");
+        subMenuNuevo.setOnAction(action -> uiController.nuevoValor(tree));
         MenuItem subMenuDeshacer = new MenuItem( "Deshacer");
         MenuItem subMenuRehacer = new MenuItem( "Rehacer");
         contextMenu.getItems().addAll(subMenuModificar,subMenuEliminar,subMenuNuevo,subMenuDeshacer,subMenuRehacer);
