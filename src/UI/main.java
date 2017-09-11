@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.*;
 import javafx.scene.layout.GridPane;
@@ -26,7 +27,9 @@ import funciones.leerIniciales;
 import funciones.leerJson;
 import java.awt.*;
 import java.awt.TextField;
+import java.security.SecurityPermission;
 import java.util.ArrayList;
+import UI.uiController.cellFactory;
 import static com.sun.org.apache.bcel.internal.util.SecuritySupport.getResourceAsStream;
 
 public class main extends Application {
@@ -42,7 +45,6 @@ public class main extends Application {
         crearMenus(grid,root);
         crearEtiquetas(grid,root);
         crearArbolDocumentos(grid,root);
-        crearTabla(grid,root);
         root.setCenter(grid);
         primaryStage.getIcons().add(icono);
         primaryStage.setScene(scene);
@@ -50,11 +52,11 @@ public class main extends Application {
     }
 
     private void crearArbolDocumentos(GridPane grid,BorderPane root){
-
+        TableView<Void> tablaModificar = crearTabla(grid,root);
         TreeItem<String> rootArchivo = new TreeItem<>("Archivos");
         rootArchivo.setExpanded(false);
         leerIniciales archivos = new leerIniciales();
-        ArrayList listaArchivos = (ArrayList) archivos.leerArchivos();
+        ArrayList<String> listaArchivos = (ArrayList<String>) archivos.leerArchivos();
         leerJson lecturaJson = new leerJson();
         for (int i = 0;i < listaArchivos.size();i++){
             String nomArchivo = listaArchivos.get(i).toString().replace(".json","");
@@ -73,7 +75,7 @@ public class main extends Application {
 
         }
         TreeView<String> tree = new TreeView<>(rootArchivo);
-        tree.setContextMenu((ContextMenu) crearContextMenu(tree));
+        tree.setContextMenu((ContextMenu) crearContextMenu(tree,tablaModificar));
         grid.add(tree,0,2);
 
     }
@@ -113,10 +115,10 @@ public class main extends Application {
         root.setTop(menuArriba);
     }
 
-    private void crearTabla(GridPane grid,BorderPane root){
-        TableView<Void> tablaModificar = new TableView<>();
+    private TableView crearTabla(GridPane grid,BorderPane root){
+        TableView<cellFactory> tablaModificar = new TableView<>();
         tablaModificar.setPlaceholder(new javafx.scene.control.Label(""));
-        TableColumn<Void, Void> columna1 = new TableColumn<>("Archivo");
+        TableColumn<cellFactory, String> columna1 = new TableColumn<>("Archivo");
         columna1.setMaxWidth(180);
         columna1.setMinWidth(180);
         TableColumn<Void, Void> columna2 = new TableColumn<>("Caracteristica");
@@ -129,22 +131,25 @@ public class main extends Application {
         columna4.setMaxWidth(205);
         columna4.setMinWidth(205);
         tablaModificar.getColumns().add(columna1);
-        tablaModificar.getColumns().add(columna2);
-        tablaModificar.getColumns().add(columna3);
-        tablaModificar.getColumns().add(columna4);
+        //tablaModificar.getColumns().add(columna2);
+        //tablaModificar.getColumns().add(columna3);
+        //tablaModificar.getColumns().add(columna4);
         tablaModificar.setMinSize(765, 400);
         tablaModificar.setMaxSize(765, 400);
         grid.add(tablaModificar, 1, 2);
 
+        return tablaModificar;
     }
 
-    private ContextMenu crearContextMenu(TreeView tree){
-        
+    private ContextMenu crearContextMenu(TreeView<String> tree, TableView<Void> tablaModificar){
+
         ContextMenu contextMenu = new ContextMenu();
         MenuItem subMenuModificar = new MenuItem( "Modificar");
-        subMenuModificar.setOnAction(action -> uiController.agregarValorTabla(tree));
+        subMenuModificar.setOnAction(action -> uiController.agregarValorTabla(tree,tablaModificar));
         MenuItem subMenuEliminar = new MenuItem( "Eliminar");
+        subMenuEliminar.setOnAction(action -> uiController.eliminarValor(tree));
         MenuItem subMenuNuevo = new MenuItem( "Nuevo");
+        subMenuNuevo.setOnAction(action -> uiController.nuevoValor(tree));
         MenuItem subMenuDeshacer = new MenuItem( "Deshacer");
         MenuItem subMenuRehacer = new MenuItem( "Rehacer");
         contextMenu.getItems().addAll(subMenuModificar,subMenuEliminar,subMenuNuevo,subMenuDeshacer,subMenuRehacer);
@@ -153,6 +158,7 @@ public class main extends Application {
     }
 
     public static void main(String[] args) {
+
         launch(args);
     }
 }
