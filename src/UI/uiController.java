@@ -67,11 +67,12 @@ public class uiController {
         }
     }
 
+    public static ObservableList listaTabla = FXCollections.observableArrayList();
+
     protected static void agregarValorTabla(TreeView<String> tree, TableView<Void> tablaModificar){
 
         TreeItem<String> item = (TreeItem<String>) tree.getSelectionModel().getSelectedItem();
         TreeItem<String> newItem;
-        List<TreeItem<String>> valores = new ArrayList<TreeItem<String>>();
         if (item.getValue().toString() == "Archivos" || item.getValue() == null){
             return;
         }
@@ -79,30 +80,59 @@ public class uiController {
         leerJson lectura = new leerJson();
         if (newItem.getValue().toString() == "Archivos"){
             newItem = item;
-            valores.add(newItem);
             for (int i = 0;i < lectura.leerNombres(newItem.getValue()).size(); i++){
                 cellFactory datos1 = new cellFactory(
                 newItem.getValue().toString(),
-                lectura.leerLlave(newItem.getValue().toString(), i).toString(),
+                lectura.leerLlave(newItem.getValue().toString(), i).toString().replace("[","").replace("]",""),
                 lectura.leerCaracteristicas(newItem.getValue().toString(), i),
                 lectura.leerTipo(newItem.getValue().toString(), i)
                 );
-                ObservableList listaTabla = FXCollections.observableArrayList(datos1);
+                listaTabla.add(datos1);
                 tablaModificar.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("nomArchivo"));
-                tablaModificar.setItems(listaTabla);
+                tablaModificar.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("caracteristica"));
+                tablaModificar.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("tipo"));
+                tablaModificar.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("dato"));
 
             }
+            tablaModificar.setItems(listaTabla);
+            return;
         }
-        else{
-            valores.add(newItem);
-        }
-        if (item.isLeaf()){
-            newItem = item.getParent().getParent();
-            valores.add(newItem);
+        else {
+            if (item.isLeaf()) {
+                newItem = item.getParent().getParent();
+                System.out.println(item.getParent().getParent().getChildren());
+                System.out.println(item);
+                cellFactory datos1 = new cellFactory(
+                        newItem.getValue(),
+                        item.getParent().getValue(),
+                        item.getValue(),
+                        lectura.leerTipo(newItem.getValue().toString(), item.getParent().getParent().getChildren().indexOf(item.getParent()))
 
-        }
-        System.out.println(valores);
+                );
+                listaTabla.add(datos1);
+                tablaModificar.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("nomArchivo"));
+                tablaModificar.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("caracteristica"));
+                tablaModificar.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("tipo"));
+                tablaModificar.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("dato"));
 
+            }
+            else{
+                newItem = item.getParent();
+                cellFactory datos1 = new cellFactory(
+                        newItem.getValue(),
+                        item.getValue(),
+                        item.getChildren().get(0).getValue(),
+                        lectura.leerTipo(newItem.getValue().toString(), item.getParent().getChildren().indexOf(item))
+
+                );
+                listaTabla.add(datos1);
+                tablaModificar.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("nomArchivo"));
+                tablaModificar.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("caracteristica"));
+                tablaModificar.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("tipo"));
+                tablaModificar.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("dato"));
+            }
+        }
+        tablaModificar.setItems(listaTabla);
     }
 
     protected static void eliminarValor(TreeView<String> tree){
