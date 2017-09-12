@@ -5,18 +5,10 @@ import funciones.escribirJson;
 import funciones.leerIniciales;
 import funciones.leerJson;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
-import javafx.util.Callback;
-import java.util.*;
-import static java.lang.System.in;
 
 public class uiController {
 

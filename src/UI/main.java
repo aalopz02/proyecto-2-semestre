@@ -1,23 +1,14 @@
 package UI;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.application.Platform;
 import javafx.scene.layout.BorderPane;
@@ -25,12 +16,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import funciones.leerIniciales;
 import funciones.leerJson;
-import java.awt.*;
-import java.awt.TextField;
-import java.security.SecurityPermission;
 import java.util.ArrayList;
 import UI.uiController.cellFactory;
-import static com.sun.org.apache.bcel.internal.util.SecuritySupport.getResourceAsStream;
 
 public class main extends Application {
 
@@ -42,17 +29,17 @@ public class main extends Application {
         Scene scene = new Scene(root, 1000, 700, Color.WHITE);
         Image icono = new Image("img/icono.png");
         primaryStage.setResizable(false);
-        crearMenus(grid,root);
-        crearEtiquetas(grid,root);
-        crearArbolDocumentos(grid,root);
+        crearMenus(root);
+        crearEtiquetas(grid);
+        crearArbolDocumentos(grid);
         root.setCenter(grid);
         primaryStage.getIcons().add(icono);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-    private void crearArbolDocumentos(GridPane grid,BorderPane root){
-        TableView<Void> tablaModificar = crearTabla(grid,root);
+    private void crearArbolDocumentos(GridPane grid){
+        TableView<Void> tablaModificar = crearTabla(grid);
         TreeItem<String> rootArchivo = new TreeItem<>("Archivos");
         rootArchivo.setExpanded(false);
         leerIniciales archivos = new leerIniciales();
@@ -80,7 +67,7 @@ public class main extends Application {
 
     }
 
-    private void crearEtiquetas(GridPane grid, BorderPane root){
+    private void crearEtiquetas(GridPane grid){
         javafx.scene.control.Label documentos = new javafx.scene.control.Label();
         documentos.setText("              Documentos");
         grid.add(documentos,0,1);
@@ -90,7 +77,7 @@ public class main extends Application {
 
     }
 
-    private void crearMenus(GridPane grid,BorderPane root){
+    private void crearMenus(BorderPane root){
         MenuBar menuArriba = new MenuBar();
         Menu menuArchivo = new Menu("Archivo");
         MenuItem subMenuNuevo = new MenuItem( "Nuevo");
@@ -115,25 +102,25 @@ public class main extends Application {
         root.setTop(menuArriba);
     }
 
-    private TableView crearTabla(GridPane grid,BorderPane root){
+    private TableView crearTabla(GridPane grid){
         TableView<cellFactory> tablaModificar = new TableView<>();
         tablaModificar.setPlaceholder(new javafx.scene.control.Label(""));
         TableColumn<cellFactory, String> columna1 = new TableColumn<>("Archivo");
         columna1.setMaxWidth(180);
         columna1.setMinWidth(180);
-        TableColumn<Void, Void> columna2 = new TableColumn<>("Caracteristica");
+        TableColumn<cellFactory, String> columna2 = new TableColumn<>("Caracteristica");
         columna2.setMaxWidth(200);
         columna2.setMinWidth(200);
-        TableColumn<Void, Void> columna3 = new TableColumn<>("Tipo");
+        TableColumn<cellFactory, String> columna3 = new TableColumn<>("Tipo");
         columna3.setMaxWidth(180);
         columna3.setMinWidth(180);
-        TableColumn<Void, Void> columna4 = new TableColumn<>("Dato");
+        TableColumn<cellFactory, String> columna4 = new TableColumn<>("Dato");
         columna4.setMaxWidth(205);
         columna4.setMinWidth(205);
         tablaModificar.getColumns().add(columna1);
-        //tablaModificar.getColumns().add(columna2);
-        //tablaModificar.getColumns().add(columna3);
-        //tablaModificar.getColumns().add(columna4);
+        tablaModificar.getColumns().add(columna2);
+        tablaModificar.getColumns().add(columna3);
+        tablaModificar.getColumns().add(columna4);
         tablaModificar.setMinSize(765, 400);
         tablaModificar.setMaxSize(765, 400);
         grid.add(tablaModificar, 1, 2);
