@@ -92,8 +92,6 @@ public class uiController {
         else {
             if (item.isLeaf()) {
                 newItem = item.getParent().getParent();
-                System.out.println(item.getParent().getParent().getChildren());
-                System.out.println(item);
                 cellFactory datos1 = new cellFactory(
                         newItem.getValue(),
                         item.getParent().getValue(),
@@ -138,8 +136,13 @@ public class uiController {
     }
 
     protected static void nuevoValor(TreeView<String> tree){
+
         TreeItem<String> item = (TreeItem<String>) tree.getSelectionModel().getSelectedItem();
+        escribirJson archivo = new escribirJson();
+        crearJson lista = new crearJson();
+
         if (item.isLeaf() || item.getValue() == null){
+
             return;
         }
         if (item.getValue().toString() == "Archivos"){
@@ -149,13 +152,28 @@ public class uiController {
             TreeItem<String> nuevo = new TreeItem<String>("ArchivoNuevo");
             nuevo.getChildren().add(nuevoRama);
             item.getChildren().add(nuevo);
+            lista.setNombreArchivo("ArchivoNuevo");
+            lista.setNombreCaracteristica("NombreCaracteristica");
+            lista.setTipoLlave("Primaria");
+            lista.setTipo("String");
+            lista.setRequerido(false);
+            archivo.escribirArchivo( "ArchivoNuevo", lista ,true);
+
             return;
         }
-        if (item.getParent().getValue() == "Archivos"){
+        if (item.getParent().getValue().toString() == "Archivos"){
             TreeItem<String> nuevoHoja = new TreeItem<String>("Caracteristica");
             TreeItem<String> nuevoRama = new TreeItem<String>("NombreCaracteristica");
             nuevoRama.getChildren().add(nuevoHoja);
             item.getChildren().add(nuevoRama);
+            lista.setNombreArchivo("NuevoArchivo");
+            lista.setNombreCaracteristica("NombreCaracteristica");
+            lista.setTipoLlave("Primaria");
+            lista.setTipo("String");
+            lista.setRequerido(false);
+            archivo.escribirArchivo( item.getValue().toString(), lista ,false);
+
+            return;
         }
 
 
