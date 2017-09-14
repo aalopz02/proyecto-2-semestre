@@ -1,65 +1,78 @@
 package funciones;
 
+import javafx.stage.Stage;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import java.util.Scanner;
+import UI.ventanaError;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class crearJson {
 
-    private JSONObject caracteristica = new JSONObject();
-    private JSONArray contenido = new JSONArray();
-    private String nombre;
-    private int cantidad;
-    private Scanner entradas = new Scanner(System.in);
+    private String nombreArchivo;
+    private String nombreCaracteristica;
+    private String tipo;
+    private String tipoLlave;
+    private Boolean requerido;
+    private Object valorDefecto;
 
-    protected void setnombre(String nombre){
-
-        this.nombre = nombre;
+    public void setNombreArchivo(String nombreArchivo){
+        this.nombreArchivo = nombreArchivo;
     }
 
-    protected void setcantidad(int cantidad){
-
-        this.cantidad = cantidad;
+    public void setNombreCaracteristica(String nombreCaracteristica){
+        this.nombreCaracteristica = nombreCaracteristica;
     }
 
-    protected String setnombredat(){
-
-        System.out.println("Digite el nombre de la caracteristica: ");
-        String nombredat = entradas.next();
-        return nombredat;
-    }
-
-    protected String settipodat(){
-
-        System.out.println("Digite el tipo de la caracteristica: ");
-        String tipodat = entradas.next();
-        return tipodat;
-    }
-
-    protected String setdato(String tipo){
-
-        System.out.println("Digite el dato: ");
-        String dato = entradas.next();
-        return dato;
-    }
-
-    protected Object escribirJson(){
-        while (cantidad > 0){
-            JSONArray arreglo = new JSONArray();
-            JSONObject datos = new JSONObject();
-            datos.put(setnombredat(),arreglo);
-            arreglo.add(settipodat());
-            arreglo.add(setdato(settipodat()));
-            contenido.add(datos);
-            cantidad = cantidad - 1;
+    public void setTipo(String tipo){
+        if (tipo == "Int" || tipo == "String" || tipo == "Double" || tipo == "Date"){
+            this.tipo = tipo;
         }
-        caracteristica.put(nombre,contenido);
-        return caracteristica;
+        else{
+            new ventanaError().crearVentana(new Stage(),"Error Tipo");
+        }
     }
 
-    protected int lencontenido(){
+    public void setTipoLlave(String tipoLlave) {
+        if (tipoLlave == "Foranea" || tipoLlave == "Primaria"){
+            this.tipoLlave = tipoLlave;
+        }
+        else{
+            new ventanaError().crearVentana(new Stage(),"Error Tipo");
+        }
+    }
 
-        return contenido.size();
+    public void setRequerido(Boolean requerido){
+        this.requerido = requerido;
+    }
+
+    public void setValorDefecto(){
+        if (requerido){
+            if (tipo.toString() == "Int"){this.valorDefecto = 123456;}
+            if (tipo.toString() == "String"){this.valorDefecto = "abcd";}
+            if (tipo.toString() == "Double"){this.valorDefecto = 12.34;}
+            if (tipo.toString() == "Date"){this.valorDefecto = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy").format(new Date());}
+        }
+        else this.valorDefecto = null;
+    }
+
+    public JSONArray crearListaJson(){
+        JSONArray listaObjetos = new JSONArray();
+        JSONObject caracteristica = new JSONObject();
+        JSONArray arreglo = new JSONArray();
+        arreglo.add(tipo);
+        arreglo.add(tipoLlave);
+        arreglo.add(requerido);
+        arreglo.add(valorDefecto);
+        caracteristica.put(nombreCaracteristica,arreglo);
+        listaObjetos.add(caracteristica);
+        return(listaObjetos);
+    }
+
+    public JSONObject escribirJson(){
+        JSONObject objetoJson = new JSONObject();
+        objetoJson.put(nombreArchivo,crearListaJson());
+        return objetoJson;
     }
 
 }

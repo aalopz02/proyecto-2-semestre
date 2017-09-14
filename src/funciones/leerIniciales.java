@@ -7,7 +7,6 @@ import java.util.List;
 public class leerIniciales {
 
     public List leerArchivos(){
-
         File carpeta = new File("./src/datos");
         File[] listaArchivos = carpeta.listFiles();
         List listaArchivosLista = new ArrayList();

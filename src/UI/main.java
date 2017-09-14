@@ -32,6 +32,7 @@ public class main extends Application {
         crearMenus(root);
         crearEtiquetas(grid);
         crearArbolDocumentos(grid);
+        crearBotonGuardar(grid);
         root.setCenter(grid);
         primaryStage.getIcons().add(icono);
         primaryStage.setScene(scene);
@@ -109,12 +110,15 @@ public class main extends Application {
         columna1.setMaxWidth(180);
         columna1.setMinWidth(180);
         TableColumn<cellFactory, String> columna2 = new TableColumn<>("Caracteristica");
+        columna2.setEditable(true);
         columna2.setMaxWidth(200);
         columna2.setMinWidth(200);
         TableColumn<cellFactory, String> columna3 = new TableColumn<>("Tipo");
+        columna3.setEditable(true);
         columna3.setMaxWidth(180);
         columna3.setMinWidth(180);
         TableColumn<cellFactory, String> columna4 = new TableColumn<>("Dato");
+        columna4.setEditable(true);
         columna4.setMaxWidth(205);
         columna4.setMinWidth(205);
         tablaModificar.getColumns().add(columna1);
@@ -142,6 +146,14 @@ public class main extends Application {
         contextMenu.getItems().addAll(subMenuModificar,subMenuEliminar,subMenuNuevo,subMenuDeshacer,subMenuRehacer);
 
         return contextMenu;
+    }
+
+    private void crearBotonGuardar(GridPane grid){
+        Button nuevoBoton = new Button();
+        nuevoBoton.setMinSize(75, 25);
+        nuevoBoton.setMaxSize(75,25);
+        nuevoBoton.setText("Commit");
+        grid.add(nuevoBoton,1,3);
     }
 
     public static void main(String[] args) {

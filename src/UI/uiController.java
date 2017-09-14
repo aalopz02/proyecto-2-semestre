@@ -9,6 +9,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+
+import java.io.File;
+import java.util.ArrayList;
 
 public class uiController {
 
@@ -131,8 +135,16 @@ public class uiController {
         if (item.getValue().toString() == "Archivos" || item.getValue() == null){
             return;
         }
+        if (item.getParent().getValue().toString() == "Archivos"){
+            File archivo = new File("./src/datos/" + item.getValue().toString() + ".json");
+            if (archivo.delete()){
+                item.getParent().getChildren().remove(item);
+                ventanaError.crearVentana(new Stage(),"Archivo Eliminado");
+                return;
+            }
+            else{ventanaError.crearVentana(new Stage(),"Error Eliminar");}
+        }
 
-        item.getParent().getChildren().remove(item);
     }
 
     protected static void nuevoValor(TreeView<String> tree){
@@ -166,7 +178,7 @@ public class uiController {
             TreeItem<String> nuevoRama = new TreeItem<String>("NombreCaracteristica");
             nuevoRama.getChildren().add(nuevoHoja);
             item.getChildren().add(nuevoRama);
-            lista.setNombreArchivo("NuevoArchivo");
+            lista.setNombreArchivo("ArchivoNuevo");
             lista.setNombreCaracteristica("NombreCaracteristica");
             lista.setTipoLlave("Primaria");
             lista.setTipo("String");
