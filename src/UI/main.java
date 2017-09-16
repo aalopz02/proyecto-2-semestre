@@ -1,6 +1,10 @@
 package UI;
 
 import javafx.application.Application;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Menu;
@@ -8,18 +12,18 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.input.*;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.application.Platform;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 import funciones.leerIniciales;
 import funciones.leerJson;
 import java.util.ArrayList;
 import UI.uiController.cellFactory;
 
 public class main extends Application {
+
+    private static VBox ventana = new VBox();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -32,6 +36,7 @@ public class main extends Application {
         crearMenus(root);
         crearEtiquetas(grid);
         crearArbolDocumentos(grid);
+        crearVentanaCambios(grid);
         crearBotonGuardar(grid);
         root.setCenter(grid);
         primaryStage.getIcons().add(icono);
@@ -70,11 +75,13 @@ public class main extends Application {
 
     private void crearEtiquetas(GridPane grid){
         javafx.scene.control.Label documentos = new javafx.scene.control.Label();
-        documentos.setText("              Documentos");
+        documentos.setText("Documentos");
         grid.add(documentos,0,1);
+        grid.setHalignment(grid.getChildren().get(0),HPos.CENTER);
         javafx.scene.control.Label movimientos = new javafx.scene.control.Label();
         movimientos.setText("Cambios");
         grid.add(movimientos,0,3);
+        grid.setHalignment(grid.getChildren().get(1),HPos.CENTER);
 
     }
 
@@ -119,14 +126,14 @@ public class main extends Application {
         columna3.setMinWidth(180);
         TableColumn<cellFactory, String> columna4 = new TableColumn<>("Dato");
         columna4.setEditable(true);
-        columna4.setMaxWidth(205);
-        columna4.setMinWidth(205);
+        columna4.setMaxWidth(203);
+        columna4.setMinWidth(203);
         tablaModificar.getColumns().add(columna1);
         tablaModificar.getColumns().add(columna2);
         tablaModificar.getColumns().add(columna3);
         tablaModificar.getColumns().add(columna4);
-        tablaModificar.setMinSize(765, 400);
-        tablaModificar.setMaxSize(765, 400);
+        tablaModificar.setMinSize(765, 398);
+        tablaModificar.setMaxSize(765, 398);
         grid.add(tablaModificar, 1, 2);
 
         return tablaModificar;
@@ -153,7 +160,29 @@ public class main extends Application {
         nuevoBoton.setMinSize(75, 25);
         nuevoBoton.setMaxSize(75,25);
         nuevoBoton.setText("Commit");
+        nuevoBoton.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, CornerRadii.EMPTY, Insets.EMPTY)));
         grid.add(nuevoBoton,1,3);
+        grid.setHalignment(grid.getChildren().get(5),HPos.CENTER);
+
+    }
+
+    protected static void crearVentanaCambios(GridPane grid){
+        ScrollPane scrollPane = new ScrollPane();
+        ventana.setMaxWidth(750);
+        ventana.setMinSize(750,241);
+        ventana.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+        scrollPane.setContent(ventana);
+        grid.add(scrollPane,0,4);
+        grid.setColumnSpan(grid.getChildren().get(4), 2);
+        grid.setHalignment(grid.getChildren().get(4),HPos.CENTER);
+
+    }
+
+    protected static void crearEtiquetasCambios(String cambios){
+        Label etiqueta = new Label(cambios);
+        ventana.getChildren().add(etiqueta);
+        System.out.println(cambios);
+
     }
 
     public static void main(String[] args) {
