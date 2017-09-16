@@ -7,18 +7,28 @@ import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
+import javafx.scene.shape.Line;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
 import funciones.leerIniciales;
 import funciones.leerJson;
+
+import java.awt.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
 import UI.uiController.cellFactory;
 
 public class main extends Application {
@@ -168,8 +178,10 @@ public class main extends Application {
 
     protected static void crearVentanaCambios(GridPane grid){
         ScrollPane scrollPane = new ScrollPane();
-        ventana.setMaxWidth(750);
-        ventana.setMinSize(750,241);
+        scrollPane.setMaxWidth(750);
+        scrollPane.setMinSize(750,241);
+        ventana.setMaxWidth(745);
+        ventana.setMinSize(745,235);
         ventana.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
         scrollPane.setContent(ventana);
         grid.add(scrollPane,0,4);
@@ -179,9 +191,14 @@ public class main extends Application {
     }
 
     protected static void crearEtiquetasCambios(String cambios){
-        Label etiqueta = new Label(cambios);
+        Label etiqueta = new Label(cambios + ". Realizado en:  " + new SimpleDateFormat("HH:mm:ss dd/MM/yyyy").format(new Date()));
+        etiqueta.setFont(new Font("Calibri",16));
+        Line line1 = new Line();
+        line1.setStartX(100);
+        line1.setEndX(850);
+        line1.setStroke(Color.LIGHTGRAY);
         ventana.getChildren().add(etiqueta);
-        System.out.println(cambios);
+        ventana.getChildren().add(line1);
 
     }
 
