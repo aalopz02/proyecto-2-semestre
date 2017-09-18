@@ -1,10 +1,9 @@
 package UI;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -13,6 +12,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
@@ -23,12 +23,9 @@ import javafx.application.Platform;
 import javafx.scene.paint.Color;
 import funciones.leerIniciales;
 import funciones.leerJson;
-
-import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
 import UI.uiController.cellFactory;
 
 public class main extends Application {
@@ -47,7 +44,6 @@ public class main extends Application {
         crearEtiquetas(grid);
         crearArbolDocumentos(grid);
         crearVentanaCambios(grid);
-        crearBotonGuardar(grid);
         root.setCenter(grid);
         primaryStage.getIcons().add(icono);
         primaryStage.setScene(scene);
@@ -56,6 +52,7 @@ public class main extends Application {
 
     private void crearArbolDocumentos(GridPane grid){
         TableView<Void> tablaModificar = crearTabla(grid);
+        crearBotonGuardar(grid,tablaModificar);
         TreeItem<String> rootArchivo = new TreeItem<>("Archivos");
         rootArchivo.setExpanded(false);
         leerIniciales archivos = new leerIniciales();
@@ -122,22 +119,50 @@ public class main extends Application {
 
     private TableView crearTabla(GridPane grid){
         TableView<cellFactory> tablaModificar = new TableView<>();
+        tablaModificar.setEditable(true);
         tablaModificar.setPlaceholder(new javafx.scene.control.Label(""));
         TableColumn<cellFactory, String> columna1 = new TableColumn<>("Archivo");
         columna1.setMaxWidth(180);
         columna1.setMinWidth(180);
         TableColumn<cellFactory, String> columna2 = new TableColumn<>("Caracteristica");
-        columna2.setEditable(true);
         columna2.setMaxWidth(200);
         columna2.setMinWidth(200);
+        columna2.setCellFactory(TextFieldTableCell.forTableColumn());
+        columna2.setOnEditCommit( new EventHandler<TableColumn.CellEditEvent<cellFactory, String>>() {
+                                      @Override
+                                      public void handle(TableColumn.CellEditEvent<cellFactory, String> t) {
+                                          ((cellFactory) t.getTableView().getItems().get(
+                                                  t.getTablePosition().getRow())
+                                          ).setCaracteristica(t.getNewValue());
+                                      }
+                                  }
+        );
         TableColumn<cellFactory, String> columna3 = new TableColumn<>("Tipo");
-        columna3.setEditable(true);
         columna3.setMaxWidth(180);
         columna3.setMinWidth(180);
+        columna3.setCellFactory(TextFieldTableCell.forTableColumn());
+        columna3.setOnEditCommit( new EventHandler<TableColumn.CellEditEvent<cellFactory, String>>() {
+                                      @Override
+                                      public void handle(TableColumn.CellEditEvent<cellFactory, String> t) {
+                                          ((cellFactory) t.getTableView().getItems().get(
+                                                  t.getTablePosition().getRow())
+                                          ).setTipo(t.getNewValue());
+                                      }
+                                  }
+        );
         TableColumn<cellFactory, String> columna4 = new TableColumn<>("Dato");
-        columna4.setEditable(true);
         columna4.setMaxWidth(203);
         columna4.setMinWidth(203);
+        columna4.setCellFactory(TextFieldTableCell.forTableColumn());
+        columna4.setOnEditCommit( new EventHandler<TableColumn.CellEditEvent<cellFactory, String>>() {
+                                      @Override
+                                      public void handle(TableColumn.CellEditEvent<cellFactory, String> t) {
+                                          ((cellFactory) t.getTableView().getItems().get(
+                                                  t.getTablePosition().getRow())
+                                          ).setDato(t.getNewValue());
+                                      }
+                                  }
+        );
         tablaModificar.getColumns().add(columna1);
         tablaModificar.getColumns().add(columna2);
         tablaModificar.getColumns().add(columna3);
@@ -165,8 +190,15 @@ public class main extends Application {
         return contextMenu;
     }
 
-    private void crearBotonGuardar(GridPane grid){
+    private void crearBotonGuardar(GridPane grid,TableView<Void> tablaModificar ){
         Button nuevoBoton = new Button();
+        nuevoBoton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                crearEtiquetasCambios("Se realizó el guardado de los cambios a los documentos");
+                uiController.realizarCambiosTabla(tablaModificar);
+            }
+        });
         nuevoBoton.setMinSize(75, 25);
         nuevoBoton.setMaxSize(75,25);
         nuevoBoton.setText("Commit");

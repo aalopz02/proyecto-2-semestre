@@ -2,7 +2,6 @@ package UI;
 
 import funciones.crearJson;
 import funciones.escribirJson;
-import funciones.leerIniciales;
 import funciones.leerJson;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -10,9 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-
 import java.io.File;
-import java.util.ArrayList;
 
 public class uiController {
 
@@ -139,6 +136,7 @@ public class uiController {
             File archivo = new File("./src/datos/" + item.getValue().toString() + ".json");
             if (archivo.delete()){
                 item.getParent().getChildren().remove(item);
+                main.crearEtiquetasCambios("Se eliminó el archivo: " + item.getValue().toString());
                 ventanaError.crearVentana(new Stage(),"Archivo Eliminado");
                 return;
             }
@@ -148,7 +146,6 @@ public class uiController {
     }
 
     protected static void nuevoValor(TreeView<String> tree){
-
         TreeItem<String> item = (TreeItem<String>) tree.getSelectionModel().getSelectedItem();
         escribirJson archivo = new escribirJson();
         crearJson lista = new crearJson();
@@ -158,19 +155,7 @@ public class uiController {
             return;
         }
         if (item.getValue().toString() == "Archivos"){
-            TreeItem<String> nuevoHoja = new TreeItem<String>("Caracteristica");
-            TreeItem<String> nuevoRama = new TreeItem<String>("NombreCaracteristica");
-            nuevoRama.getChildren().add(nuevoHoja);
-            TreeItem<String> nuevo = new TreeItem<String>("ArchivoNuevo");
-            nuevo.getChildren().add(nuevoRama);
-            item.getChildren().add(nuevo);
-            lista.setNombreArchivo("ArchivoNuevo");
-            lista.setNombreCaracteristica("NombreCaracteristica");
-            lista.setTipoLlave("Primaria");
-            lista.setTipo("String");
-            lista.setRequerido(false);
-            archivo.escribirArchivo( "ArchivoNuevo", lista ,true);
-
+            ventanaError.ventanaNombreArchivo(lista,archivo,item);
             return;
         }
         if (item.getParent().getValue().toString() == "Archivos"){
@@ -184,9 +169,15 @@ public class uiController {
             lista.setTipo("String");
             lista.setRequerido(false);
             archivo.escribirArchivo( item.getValue().toString(), lista ,false);
+            main.crearEtiquetasCambios("Se le agregó una nueva caracteristica al documento: " + item.getValue().toString());
 
             return;
         }
+
+
+    }
+
+    protected static void realizarCambiosTabla(TableView<Void> tablaModificar){
 
 
     }
