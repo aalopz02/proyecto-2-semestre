@@ -31,6 +31,7 @@ import UI.uiController.cellFactory;
 public class main extends Application {
 
     private static VBox ventana = new VBox();
+    private TableView<Void> tablaModificar;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -40,10 +41,11 @@ public class main extends Application {
         Scene scene = new Scene(root, 1000, 700, Color.WHITE);
         Image icono = new Image("img/icono.png");
         primaryStage.setResizable(false);
-        crearMenus(root);
         crearEtiquetas(grid);
         crearArbolDocumentos(grid);
         crearVentanaCambios(grid);
+        crearBotonGuardar(grid,tablaModificar);
+        crearMenus(root);
         root.setCenter(grid);
         primaryStage.getIcons().add(icono);
         primaryStage.setScene(scene);
@@ -51,8 +53,7 @@ public class main extends Application {
     }
 
     private void crearArbolDocumentos(GridPane grid){
-        TableView<Void> tablaModificar = crearTabla(grid);
-        crearBotonGuardar(grid,tablaModificar);
+        tablaModificar = crearTabla(grid);
         TreeItem<String> rootArchivo = new TreeItem<>("Archivos");
         rootArchivo.setExpanded(false);
         leerIniciales archivos = new leerIniciales();
@@ -95,25 +96,19 @@ public class main extends Application {
     private void crearMenus(BorderPane root){
         MenuBar menuArriba = new MenuBar();
         Menu menuArchivo = new Menu("Archivo");
-        MenuItem subMenuNuevo = new MenuItem( "Nuevo");
-        subMenuNuevo.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.SHORTCUT_DOWN));
         MenuItem subMenuSalvar = new MenuItem("Salvar");
         subMenuSalvar.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.SHORTCUT_DOWN));
+        subMenuSalvar.setOnAction(action ->
+                uiController.realizarCambiosTabla(tablaModificar)
+        );
         MenuItem subMenuSalir = new MenuItem( "Salir");
         subMenuSalir.setAccelerator(new KeyCodeCombination(KeyCode.F4, KeyCombination.ALT_DOWN));
         subMenuSalir.setOnAction(actionEvent -> Platform.exit());
-        menuArchivo.getItems().addAll(subMenuNuevo, subMenuSalvar,new SeparatorMenuItem(), subMenuSalir);
-        Menu menuVer = new Menu("Ver");
-        MenuItem subMenuRetroceso = new MenuItem("Retroceso");
-        subMenuRetroceso.setAccelerator(new KeyCodeCombination(KeyCode.Z, KeyCombination.SHORTCUT_DOWN));
-        MenuItem subMenuRehacer = new MenuItem(  "Rehacer");
-        subMenuRehacer.setAccelerator(new KeyCodeCombination(KeyCode.R, KeyCombination.SHORTCUT_DOWN));
-        MenuItem subMenuCambios = new MenuItem("Ver Cambios");
-        menuVer.getItems().addAll(subMenuCambios,subMenuRetroceso,subMenuRehacer);
+        menuArchivo.getItems().addAll(subMenuSalvar,new SeparatorMenuItem(), subMenuSalir);
         Menu menuAyuda = new Menu("Ayuda");
         MenuItem subMenuAyuda = new MenuItem("Ayuda");
         menuAyuda.getItems().addAll(subMenuAyuda);
-        menuArriba.getMenus().addAll(menuArchivo,menuVer,menuAyuda);
+        menuArriba.getMenus().addAll(menuArchivo,menuAyuda);
         root.setTop(menuArriba);
     }
 
@@ -195,7 +190,7 @@ public class main extends Application {
         nuevoBoton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                crearEtiquetasCambios("Se realizó el guardado de los cambios a los documentos");
+                crearEtiquetasCambios("Todos los cambios fueron realizados");
                 uiController.realizarCambiosTabla(tablaModificar);
             }
         });

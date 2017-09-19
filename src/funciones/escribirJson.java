@@ -10,7 +10,7 @@ public class escribirJson {
 
     public static void escribirArchivo(String dato, crearJson archivo, Boolean reescribir) {
 
-        if (reescribir == true){
+        if (reescribir){
 
             try (FileWriter file = new FileWriter("./src/datos/" + dato + ".json")) {
                 file.write(archivo.escribirJson().toString());

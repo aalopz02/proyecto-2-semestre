@@ -178,8 +178,20 @@ public class uiController {
     }
 
     protected static void realizarCambiosTabla(TableView<Void> tablaModificar){
-
-
+        for(int i = 0; i < listaTabla.size(); i++){
+            cellFactory objeto = (cellFactory) listaTabla.get(i);
+            crearJson listaJson = new crearJson();
+            listaJson.setNombreCaracteristica(objeto.getCaracteristica());
+            listaJson.setRequerido(false);
+            listaJson.setTipoLlave("Primaria");
+            listaJson.setTipo(objeto.getTipo());
+            listaJson.setValorDefecto(objeto.getDato());
+            listaJson.setNombreArchivo(objeto.getNomArchivo());
+            listaJson.crearListaJson();
+            escribirJson archivo = new escribirJson();
+            archivo.escribirArchivo(objeto.getNomArchivo(),listaJson,false);
+        }
+        main.crearEtiquetasCambios("Se realizó el guardado de los cambios a los documentos");
     }
 
 }

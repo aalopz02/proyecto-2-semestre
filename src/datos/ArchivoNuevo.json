@@ -1,1 +1,1 @@
-{"ArchivoNuevo":[{"NombreCaracteristica":["String","Primaria",false,null]}]}
+{"ArchivoNuevo":[{"Cedula":["Int","Primaria",false,"1234"]}]}

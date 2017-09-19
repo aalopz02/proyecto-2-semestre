@@ -25,7 +25,7 @@ public class crearJson {
     }
 
     public void setTipo(String tipo){
-        if (tipo == "Int" || tipo == "String" || tipo == "Double" || tipo == "Date"){
+        if (tipo.equals("Int") || tipo.equals("String") || tipo.equals("Double") || tipo.equals("Date")){
             this.tipo = tipo;
         }
         else{
@@ -46,14 +46,14 @@ public class crearJson {
         this.requerido = requerido;
     }
 
-    public void setValorDefecto(){
+    public void setValorDefecto(String valorDefecto){
         if (requerido){
             if (tipo.toString() == "Int"){this.valorDefecto = 123456;}
             if (tipo.toString() == "String"){this.valorDefecto = "abcd";}
             if (tipo.toString() == "Double"){this.valorDefecto = 12.34;}
             if (tipo.toString() == "Date"){this.valorDefecto = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy").format(new Date());}
         }
-        else this.valorDefecto = null;
+        else this.valorDefecto = valorDefecto;
     }
 
     public JSONArray crearListaJson(){
