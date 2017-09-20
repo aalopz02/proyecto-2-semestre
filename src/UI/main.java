@@ -1,5 +1,7 @@
 package UI;
 
+//enlace a git: https://github.com/aalopz02/proyecto-2-semestre
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -178,9 +180,7 @@ public class main extends Application {
         subMenuEliminar.setOnAction(action -> uiController.eliminarValor(tree));
         MenuItem subMenuNuevo = new MenuItem( "Nuevo");
         subMenuNuevo.setOnAction(action -> uiController.nuevoValor(tree));
-        MenuItem subMenuDeshacer = new MenuItem( "Deshacer");
-        MenuItem subMenuRehacer = new MenuItem( "Rehacer");
-        contextMenu.getItems().addAll(subMenuModificar,subMenuEliminar,subMenuNuevo,subMenuDeshacer,subMenuRehacer);
+        contextMenu.getItems().addAll(subMenuModificar,subMenuEliminar,subMenuNuevo);
 
         return contextMenu;
     }
