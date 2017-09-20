@@ -1,0 +1,1 @@
+Para visualizar el documento se debe de abrir el archivo, index.HTML
