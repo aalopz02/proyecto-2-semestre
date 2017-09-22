@@ -16,6 +16,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
@@ -43,6 +44,7 @@ public class main extends Application {
         Scene scene = new Scene(root, 1000, 700, Color.WHITE);
         Image icono = new Image("img/icono.png");
         primaryStage.setResizable(false);
+        grid.setVgap(5);
         crearEtiquetas(grid);
         crearArbolDocumentos(grid);
         crearVentanaCambios(grid);
@@ -186,7 +188,15 @@ public class main extends Application {
     }
 
     private void crearBotonGuardar(GridPane grid,TableView<Void> tablaModificar ){
+        Image lupa = new Image("img/lupa.png");
         Button nuevoBoton = new Button();
+        Button buscar = new Button();
+        TextField entrada = new TextField();
+        GridPane contenedor = new GridPane();
+        ColumnConstraints col1 = new ColumnConstraints(30);
+        ColumnConstraints col2 = new ColumnConstraints(80);
+        ColumnConstraints col3 = new ColumnConstraints(655);
+        contenedor.getColumnConstraints().addAll(col1,col2,col3);
         nuevoBoton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -194,12 +204,27 @@ public class main extends Application {
                 uiController.realizarCambiosTabla(tablaModificar);
             }
         });
+        buscar.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                System.out.println(contenedor.getChildren());
+            }
+        });
+        buscar.setGraphic(new ImageView(lupa));
+        buscar.setMinSize(25,25);
+        buscar.setMaxSize(25,25);
         nuevoBoton.setMinSize(75, 25);
         nuevoBoton.setMaxSize(75,25);
         nuevoBoton.setText("Commit");
+        entrada.setPromptText("Buscar");
+        entrada.setMaxSize(85,25);
+        entrada.setMinSize(85,25);
         nuevoBoton.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, CornerRadii.EMPTY, Insets.EMPTY)));
-        grid.add(nuevoBoton,1,3);
-        grid.setHalignment(grid.getChildren().get(5),HPos.CENTER);
+        contenedor.add(nuevoBoton,2,0);
+        contenedor.add(buscar,0,0);
+        contenedor.add(entrada,1,0);
+        grid.add(contenedor,1,3);
+        contenedor.setHalignment(contenedor.getChildren().get(0),HPos.CENTER);
 
     }
 

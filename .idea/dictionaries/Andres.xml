@@ -2,13 +2,28 @@
   <dictionary name="Andres">
     <words>
       <w>aplicacion</w>
+      <w>boton</w>
+      <w>buscar</w>
+      <w>cambios</w>
       <w>cantidad</w>
       <w>caracteristica</w>
+      <w>contenedor</w>
       <w>contenido</w>
+      <w>crear</w>
+      <w>entrada</w>
       <w>entradas</w>
+      <w>etiquetas</w>
+      <w>fueron</w>
+      <w>guardar</w>
       <w>interfaz</w>
+      <w>lupa</w>
+      <w>modificar</w>
       <w>nombre</w>
+      <w>nuevo</w>
+      <w>realizados</w>
       <w>setdato</w>
+      <w>todos</w>
+      <w>ventana</w>
     </words>
   </dictionary>
 </component>

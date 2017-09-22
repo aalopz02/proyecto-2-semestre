@@ -19,12 +19,17 @@ public class uiController {
         public SimpleStringProperty caracteristica;
         public SimpleStringProperty dato;
         public SimpleStringProperty tipo;
+        public SimpleStringProperty tipollave;
+        public Boolean requerido;
 
-        public cellFactory(String nomArchivo, String caracteristica, String dato, String tipo){
+        public cellFactory(String nomArchivo, String caracteristica, String dato, String tipo, Boolean requerido, String tipollave){
             this.nomArchivo = new SimpleStringProperty(nomArchivo);
             this.caracteristica = new SimpleStringProperty(caracteristica);
             this.dato = new SimpleStringProperty(dato);
             this.tipo = new SimpleStringProperty(tipo);
+            this.requerido = requerido;
+            this.tipollave = new SimpleStringProperty(tipollave);
+
         }
 
         public void setNomArchivo(String nomArchivo) {
@@ -58,6 +63,22 @@ public class uiController {
         public String getTipo() {
             return tipo.get();
         }
+
+        public void setRequerido(Boolean requerido) {
+            this.requerido = requerido;
+        }
+
+        public void setTipollave(String tipollave) {
+            this.tipollave.set(tipollave);
+        }
+
+        public Boolean getRequerido() {
+            return requerido;
+        }
+
+        public String getTipollave() {
+            return tipollave.get();
+        }
     }
 
     public static ObservableList listaTabla = FXCollections.observableArrayList();
@@ -66,19 +87,21 @@ public class uiController {
 
         TreeItem<String> item = (TreeItem<String>) tree.getSelectionModel().getSelectedItem();
         TreeItem<String> newItem;
-        if (item.getValue().toString() == "Archivos" || item.getValue() == null){
+        if (item.getValue().toString().equals("Archivos") || item.getValue() == null){
             return;
         }
         newItem = item.getParent();
         leerJson lectura = new leerJson();
-        if (newItem.getValue().toString() == "Archivos"){
+        if (newItem.getValue().toString().equals("Archivos")){
             newItem = item;
             for (int i = 0;i < lectura.leerNombres(newItem.getValue()).size(); i++){
                 cellFactory datos1 = new cellFactory(
-                newItem.getValue().toString(),
-                lectura.leerLlave(newItem.getValue().toString(), i).toString().replace("[","").replace("]",""),
-                lectura.leerCaracteristicas(newItem.getValue().toString(), i),
-                lectura.leerTipo(newItem.getValue().toString(), i)
+                    newItem.getValue().toString(),
+                    lectura.leerLlave(newItem.getValue().toString(), i).toString().replace("[","").replace("]",""),
+                    lectura.leerCaracteristicas(newItem.getValue().toString(), i),
+                    lectura.leerTipo(newItem.getValue().toString(), i),
+                    lectura.leerRequerido(newItem.getValue().toString(), i),
+                    lectura.leerTipoLlave(newItem.getValue().toString(), i)
                 );
                 listaTabla.add(datos1);
                 tablaModificar.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("nomArchivo"));
@@ -97,7 +120,9 @@ public class uiController {
                         newItem.getValue(),
                         item.getParent().getValue(),
                         item.getValue(),
-                        lectura.leerTipo(newItem.getValue().toString(), item.getParent().getParent().getChildren().indexOf(item.getParent()))
+                        lectura.leerTipo(newItem.getValue().toString(), item.getParent().getParent().getChildren().indexOf(item.getParent())),
+                        lectura.leerRequerido(newItem.getValue().toString(), item.getParent().getParent().getChildren().indexOf(item.getParent())),
+                        lectura.leerTipoLlave(newItem.getValue().toString(), item.getParent().getParent().getChildren().indexOf(item.getParent()))
 
                 );
                 listaTabla.add(datos1);
@@ -113,8 +138,9 @@ public class uiController {
                         newItem.getValue(),
                         item.getValue(),
                         item.getChildren().get(0).getValue(),
-                        lectura.leerTipo(newItem.getValue().toString(), item.getParent().getChildren().indexOf(item))
-
+                        lectura.leerTipo(newItem.getValue().toString(), item.getParent().getChildren().indexOf(item)),
+                        lectura.leerRequerido(newItem.getValue().toString(), item.getParent().getChildren().indexOf(item)),
+                        lectura.leerTipoLlave(newItem.getValue().toString(), item.getParent().getChildren().indexOf(item))
                 );
                 listaTabla.add(datos1);
                 tablaModificar.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("nomArchivo"));
@@ -129,10 +155,10 @@ public class uiController {
     protected static void eliminarValor(TreeView<String> tree){
         TreeItem<String> item = (TreeItem<String>) tree.getSelectionModel().getSelectedItem();
 
-        if (item.getValue().toString() == "Archivos" || item.getValue() == null){
+        if (item.getValue().toString().equals("Archivos") || item.getValue() == null){
             return;
         }
-        if (item.getParent().getValue().toString() == "Archivos"){
+        if (item.getParent().getValue().toString().equals("Archivos")){
             File archivo = new File("./src/datos/" + item.getValue().toString() + ".json");
             if (archivo.delete()){
                 item.getParent().getChildren().remove(item);
@@ -154,11 +180,11 @@ public class uiController {
 
             return;
         }
-        if (item.getValue().toString() == "Archivos"){
+        if (item.getValue().toString().equals("Archivos")){
             ventanaError.ventanaNombreArchivo(lista,archivo,item);
             return;
         }
-        if (item.getParent().getValue().toString() == "Archivos"){
+        if (item.getParent().getValue().toString().equals("Archivos")){
             TreeItem<String> nuevoHoja = new TreeItem<String>("Caracteristica");
             TreeItem<String> nuevoRama = new TreeItem<String>("NombreCaracteristica");
             nuevoRama.getChildren().add(nuevoHoja);
@@ -174,7 +200,6 @@ public class uiController {
             return;
         }
 
-
     }
 
     protected static void realizarCambiosTabla(TableView<Void> tablaModificar){
@@ -182,8 +207,8 @@ public class uiController {
             cellFactory objeto = (cellFactory) listaTabla.get(i);
             crearJson listaJson = new crearJson();
             listaJson.setNombreCaracteristica(objeto.getCaracteristica());
-            listaJson.setRequerido(false);
-            listaJson.setTipoLlave("Primaria");
+            listaJson.setRequerido(objeto.getRequerido());
+            listaJson.setTipoLlave(objeto.getTipollave());
             listaJson.setTipo(objeto.getTipo());
             listaJson.setValorDefecto(objeto.getDato());
             listaJson.setNombreArchivo(objeto.getNomArchivo());
