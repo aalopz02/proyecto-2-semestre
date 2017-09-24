@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import java.io.File;
+import java.util.ArrayList;
 
 public class uiController {
 
@@ -191,10 +192,12 @@ public class uiController {
             item.getChildren().add(nuevoRama);
             lista.setNombreArchivo("ArchivoNuevo");
             lista.setNombreCaracteristica("NombreCaracteristica");
-            lista.setTipoLlave("Primaria");
+            ventanaError.ventanaTipoLlave(lista);
             lista.setTipo("String");
-            lista.setRequerido(false);
-            archivo.escribirArchivo( item.getValue().toString(), lista ,false);
+            ArrayList indice = new ArrayList();
+            indice.add(false);
+            indice.add("+");
+            archivo.escribirArchivo( item.getValue().toString(), lista, indice );
             main.crearEtiquetasCambios("Se le agregó una nueva caracteristica al documento: " + item.getValue().toString());
 
             return;
@@ -207,15 +210,19 @@ public class uiController {
             cellFactory objeto = (cellFactory) listaTabla.get(i);
             crearJson listaJson = new crearJson();
             listaJson.setNombreCaracteristica(objeto.getCaracteristica());
-            listaJson.setRequerido(objeto.getRequerido());
-            listaJson.setTipoLlave(objeto.getTipollave());
+            listaJson.setRequerido(false);
+            listaJson.setTipoLlave("Primaria");
             listaJson.setTipo(objeto.getTipo());
             listaJson.setValorDefecto(objeto.getDato());
             listaJson.setNombreArchivo(objeto.getNomArchivo());
             listaJson.crearListaJson();
             escribirJson archivo = new escribirJson();
-            archivo.escribirArchivo(objeto.getNomArchivo(),listaJson,false);
+            ArrayList indice = new ArrayList();
+            indice.add(false);
+            indice.add(i);
+            archivo.escribirArchivo(objeto.getNomArchivo(),listaJson,indice);
         }
+        listaTabla.removeAll(listaTabla);
         main.crearEtiquetasCambios("Se realizó el guardado de los cambios a los documentos");
     }
 

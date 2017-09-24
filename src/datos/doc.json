@@ -1,1 +1,1 @@
-{"doc":[{"NombreCaracteristica":["String","Primaria",false,null]},{"NombreCaracteristica":["String",null,false,"ValorVacio"]}]}
+{"doc":[{"Cedula":["Int","Primaria",false,"123345"]},{"macarron":["String","Primaria",false,"ValorVacio"]}]}

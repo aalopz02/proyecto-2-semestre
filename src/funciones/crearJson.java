@@ -30,16 +30,12 @@ public class crearJson {
         }
         else{
             new ventanaError().crearVentana(new Stage(),"Error Tipo");
+            this.tipo = "String";
         }
     }
 
     public void setTipoLlave(String tipoLlave) {
-        if (tipoLlave == "Foranea" || tipoLlave == "Primaria"){
             this.tipoLlave = tipoLlave;
-        }
-        else{
-            new ventanaError().crearVentana(new Stage(),"Error Tipo");
-        }
     }
 
     public void setRequerido(Boolean requerido){
