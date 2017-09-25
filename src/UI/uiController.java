@@ -156,7 +156,7 @@ public class uiController {
     protected static void eliminarValor(TreeView<String> tree){
         TreeItem<String> item = (TreeItem<String>) tree.getSelectionModel().getSelectedItem();
 
-        if (item.getValue().toString().equals("Archivos") || item.getValue() == null){
+        if (item == null || item.getValue().toString().equals("Archivos") || item.getValue() == null){
             return;
         }
         if (item.getParent().getValue().toString().equals("Archivos")){
@@ -167,7 +167,38 @@ public class uiController {
                 ventanaError.crearVentana(new Stage(),"Archivo Eliminado");
                 return;
             }
-            else{ventanaError.crearVentana(new Stage(),"Error Eliminar");}
+            else{
+                ventanaError.crearVentana(new Stage(),"Error Eliminar");
+                return;
+            }
+        }
+        if (item.getParent().getParent().getValue().equals("Archivos")){
+            leerJson archivo = new leerJson();
+            if (item.getParent().getChildren().size() == 1){
+                File archivos = new File("./src/datos/" + item.getParent().getValue().toString() + ".json");
+                if (archivos.delete()){
+                    item.getParent().getParent().getChildren().remove(item.getParent());
+                    main.crearEtiquetasCambios("Se eliminó el archivo: " + item.getParent().getValue().toString());
+                    ventanaError.crearVentana(new Stage(),"El Archivo Vacio Fue Eliminado");
+                    return;
+                }
+                else{
+                    ventanaError.crearVentana(new Stage(),"Error Eliminar");
+                    return;
+                }
+
+            }
+            if(archivo.leerRequerido(item.getParent().getValue(),item.getParent().getChildren().indexOf(item))){
+                ventanaError.crearVentana(new Stage(), "Dato es Requerido");
+            }
+            else{
+                ArrayList lista = new ArrayList();
+                lista.add("Eliminar");
+                lista.add(item.getParent().getChildren().indexOf(item));
+                escribirJson.escribirArchivo(item.getParent().getValue(),new crearJson(),lista);
+                item.getParent().getChildren().remove(item);
+                main.crearEtiquetasCambios("Se eliminó la característica: " + item.getValue().toString());
+            }
         }
 
     }
@@ -176,15 +207,12 @@ public class uiController {
         TreeItem<String> item = (TreeItem<String>) tree.getSelectionModel().getSelectedItem();
         escribirJson archivo = new escribirJson();
         crearJson lista = new crearJson();
-
-        if (item.isLeaf() || item.getValue() == null){
-
-            return;
-        }
+        if (item == null || item.getValue() == null){return;}
         if (item.getValue().toString().equals("Archivos")){
             ventanaError.ventanaNombreArchivo(lista,archivo,item);
             return;
         }
+        if (item.isLeaf()){ return; }
         if (item.getParent().getValue().toString().equals("Archivos")){
             TreeItem<String> nuevoHoja = new TreeItem<String>("Caracteristica");
             TreeItem<String> nuevoRama = new TreeItem<String>("NombreCaracteristica");

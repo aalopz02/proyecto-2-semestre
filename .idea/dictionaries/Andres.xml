@@ -2,23 +2,42 @@
   <dictionary name="Andres">
     <words>
       <w>aceptar</w>
+      <w>agregar</w>
+      <w>agregó</w>
       <w>aplicacion</w>
+      <w>archivo</w>
+      <w>archivos</w>
+      <w>arreglo</w>
       <w>boton</w>
       <w>buscar</w>
       <w>cambios</w>
       <w>cantidad</w>
       <w>caracteristica</w>
+      <w>característica</w>
+      <w>configurar</w>
       <w>contenedor</w>
       <w>contenido</w>
       <w>crear</w>
+      <w>creó</w>
+      <w>dato</w>
+      <w>datos</w>
+      <w>documento</w>
+      <w>eliminado</w>
+      <w>eliminar</w>
+      <w>eliminó</w>
       <w>entrada</w>
       <w>entradas</w>
+      <w>escribir</w>
       <w>etiqueta</w>
       <w>etiquetas</w>
       <w>foranea</w>
       <w>fueron</w>
       <w>guardar</w>
+      <w>hoja</w>
+      <w>icono</w>
+      <w>indice</w>
       <w>interfaz</w>
+      <w>lista</w>
       <w>llave</w>
       <w>lupa</w>
       <w>modificar</w>
@@ -27,12 +46,15 @@
       <w>posibles</w>
       <w>primaria</w>
       <w>realizados</w>
+      <w>realizar</w>
       <w>requerido</w>
       <w>setdato</w>
+      <w>texto</w>
       <w>tipo</w>
       <w>todos</w>
       <w>vacio</w>
       <w>ventana</w>
+      <w>verificar</w>
     </words>
   </dictionary>
 </component>

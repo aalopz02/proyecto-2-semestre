@@ -8,6 +8,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.geometry.HPos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -47,11 +48,13 @@ public class ventanaError {
 
         Label etiqueta = new Label();
         String texto = "Error";
-        if (error == "Error Tipo"){texto = "El tipo de dato no \n" + "corresponde al tipo de variable";}
-        if (error == "Error Escritura"){texto = "Ocurrió un error \n" + "al intentar escribir el archivo";}
-        if (error == "Error Lectura"){texto = "El archivo no se puede leer \n" + "o no se puede encontrar";}
-        if (error == "Error Eliminar"){texto = "El archivo no se pudo eliminar";}
-        if (error == "Archivo Eliminado"){texto = "El archivo fue eliminado";}
+        if (error.equals("Error Tipo")){texto = "El tipo de dato no \n" + "corresponde al tipo de variable";}
+        if (error.equals("Error Escritura")){texto = "Ocurrió un error \n" + "al intentar escribir el archivo";}
+        if (error.equals("Error Lectura")){texto = "El archivo no se puede leer \n" + "o no se puede encontrar";}
+        if (error.equals("Error Eliminar")){texto = "El archivo no se pudo eliminar";}
+        if (error.equals("Archivo Eliminado")){texto = "El archivo fue eliminado";}
+        if (error.equals("El Archivo Vacio Fue Eliminado")){texto = "Se eliminó la última\n" + "característica de un documento";}
+        if (error.equals("Dato es Requerido")){texto = "El dato que se quiere eliminar es requerido";}
         etiqueta.setText(texto);
         etiqueta.setTextAlignment(TextAlignment.CENTER);
 
@@ -66,32 +69,50 @@ public class ventanaError {
         Image icono = new Image("img/iconoError.png");
         nuevo.getIcons().add(icono);
         Scene scene = new Scene(root, 250, 100, Color.WHITE);
+        GridPane grid = new GridPane();
         TextField nombreArchivo = new TextField();
+        Label etiqueta = new Label("Nombre Archivo");
         nombreArchivo.setPromptText("Nombre Archivo");
+        Button aceptar = new Button("Aceptar");
+        grid.add(etiqueta,0,0);
+        grid.add(nombreArchivo,1,0);
+        grid.add(aceptar ,0,3,2,2);
+        grid.setHalignment(aceptar,HPos.CENTER);
+        grid.setValignment(aceptar, VPos.BOTTOM);
         root.requestFocus();
-        root.setCenter(nombreArchivo);
+        root.setCenter(grid);
         nuevo.setScene(scene);
-        nombreArchivo.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        nuevo.setOnCloseRequest(new EventHandler<WindowEvent>(){
             @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode().equals(KeyCode.ENTER)){
-                    TreeItem<String> nuevoHoja = new TreeItem<String>("Caracteristica");
-                    TreeItem<String> nuevoRama = new TreeItem<String>("NombreCaracteristica");
-                    nuevoRama.getChildren().add(nuevoHoja);
-                    TreeItem<String> nuevoRoot = new TreeItem<String>(nombreArchivo.getText());
-                    nuevoRoot.getChildren().add(nuevoRama);
-                    item.getChildren().add(nuevoRoot);
-                    lista.setNombreArchivo(nombreArchivo.getText());
-                    lista.setNombreCaracteristica("NombreCaracteristica");
-                    lista.setTipo("String");
-                    ventanaTipoLlave(lista);
-                    ArrayList indice = new ArrayList();
-                    indice.add(true);
-                    archivo.escribirArchivo(nombreArchivo.getText() , lista ,indice);
-                    main.crearEtiquetasCambios("Se creó un documento Json nuevo");
-
-                    nuevo.close();
+            public void handle(WindowEvent event) {
+                if (nombreArchivo.getText().equals("")) {
+                    ventanaNombreArchivo(lista, archivo, item);
                 }
+            }
+        });
+        aceptar.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                String texto = nombreArchivo.getText();
+                if (texto.equals("")) {
+                    texto = "ArchivoNuevo";
+                }
+                TreeItem<String> nuevoHoja = new TreeItem<String>("Caracteristica");
+                TreeItem<String> nuevoRama = new TreeItem<String>("NombreCaracteristica");
+                nuevoRama.getChildren().add(nuevoHoja);
+                TreeItem<String> nuevoRoot = new TreeItem<String>(texto);
+                nuevoRoot.getChildren().add(nuevoRama);
+                item.getChildren().add(nuevoRoot);
+                lista.setNombreArchivo(texto);
+                lista.setNombreCaracteristica("NombreCaracteristica");
+                lista.setTipo("String");
+                ventanaTipoLlave(lista);
+                ArrayList indice = new ArrayList();
+                indice.add(true);
+                archivo.escribirArchivo(texto, lista, indice);
+                main.crearEtiquetasCambios("Se creó un documento Json nuevo");
+                nombreArchivo.setText(texto);
+                nuevo.close();
             }
         });
         nuevo.show();
@@ -120,9 +141,10 @@ public class ventanaError {
         grid.add(etiqueta1,0,0);
         grid.add(etiqueta2,0,1);
         grid.add(tipo,1,0);
-        grid.add(requerido,1,2);
-        grid.add(aceptar,0,2,1,1);
+        grid.add(requerido,1,1);
+        grid.add(aceptar,0,3,2,2);
         grid.setHalignment(aceptar, HPos.CENTER);
+        grid.setValignment(aceptar, VPos.BOTTOM);
         ArrayList posibles = new ArrayList();
         posibles.add("Primaria");
         posibles.add("Foranea");

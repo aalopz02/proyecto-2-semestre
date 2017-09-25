@@ -11,9 +11,19 @@ import java.util.List;
 public class escribirJson {
 
     public static void escribirArchivo(String dato, crearJson archivo, ArrayList indice) {
-
+        if (indice.get(0).equals("Eliminar")){
+            JSONObject archivoNuevo = new JSONObject();
+            ArrayList arreglo = new leerJson().leerNombres(dato);
+            arreglo.remove((int) indice.get(1));
+            archivoNuevo.put(dato,arreglo);
+            try (FileWriter file = new FileWriter("./src/datos/" + dato + ".json")) {
+                file.write(archivoNuevo.toString());
+            } catch (IOException e) {
+                UI.ventanaError.crearVentana(new Stage(),"Error Escritura");
+            }
+            return;
+        }
         if ((Boolean) indice.get(0)){
-
             try (FileWriter file = new FileWriter("./src/datos/" + dato + ".json")) {
                 file.write(archivo.escribirJson().toString());
             } catch (IOException e) {
@@ -21,7 +31,6 @@ public class escribirJson {
             }
         }
         else{
-
             JSONObject archivoNuevo = new JSONObject();
             ArrayList arreglo = new leerJson().leerNombres(dato);
             if (indice.get(1).equals("+")){
