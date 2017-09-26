@@ -111,6 +111,7 @@ public class main extends Application {
         menuArchivo.getItems().addAll(subMenuSalvar,new SeparatorMenuItem(), subMenuSalir);
         Menu menuAyuda = new Menu("Ayuda");
         MenuItem subMenuAyuda = new MenuItem("Ayuda");
+        subMenuAyuda.setOnAction(actionEvent -> uiController.abrirTexto());
         menuAyuda.getItems().addAll(subMenuAyuda);
         menuArriba.getMenus().addAll(menuArchivo,menuAyuda);
         root.setTop(menuArriba);

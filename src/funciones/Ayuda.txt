@@ -1,0 +1,37 @@
+a) Aspectos generales de la aplicación.
+La aplicación se utiliza para guardar documentos con formato .Json.
+Cada archivo contiene mas objetos de estee tipo. Cada uno contiene: 
+Nombre de la característica.
+Tipo.
+Tipo de llave.
+Si es requerida.
+Valores.
+b) Crear un nuevo documento.
+Hacer click derecho sobre Archivos en el árbol y seleccionar nuevo.
+Digitar el nombre del archivo y presionar aceptar.
+En la otra ventana digitar el tipo de llave, Foranea ó Primaria, en ese mismo formato de texto.
+En el otro campo de texto digitar true, si es requerido, ó false si no es requerido.
+Presionar aceptar.
+c) Crear una nueva característica.
+Seleccionar el documento al que se quiere agregar la característica.
+En la ventana nueva digitar e tipo de llave, Foranea ó Primaria.
+Digitar true ó false, si es requerido o no.
+Presionar aceptar.
+d) Modificar una característica.
+-Todos las características:
+Dar click derecho sobre un archivo.
+Presionar modificar.
+Dar click en la tabla a los valores a modificar.
+Digitar el cambio y presionar enter para guardar el valor en tabla.
+Hacer todos los cambios y al terminar presionar el botón de commit ó el botón de guardar del menú archivo.
+-Una característica:
+Dar click derecho sobre la característica.
+Presionar modificar.
+Dar click en la tabla a los valores a modificar.
+Digitar el cambio y presionar enter para guardar el valor en tabla.
+Hacer todos los cambios y al terminar presionar el botón de commit ó el botón de guardar del menú archivo.
+e) Eliminar un archivo o característica.
+Dar click derecho sobre el objeto a eliminar y seleccionar eliminar.
+Solo se pueden eliminar características que no son requeridas.
+f) Buscar una característica.
+Para buscar un dato digite el nombre de la característca a buscar y se desplegará en la tabla.

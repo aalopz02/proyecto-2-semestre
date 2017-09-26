@@ -9,7 +9,10 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+
+import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class uiController {
@@ -252,6 +255,20 @@ public class uiController {
         }
         listaTabla.removeAll(listaTabla);
         main.crearEtiquetasCambios("Se realizó el guardado de los cambios a los documentos");
+    }
+
+    protected static void abrirTexto() {
+        File file = new File("./src/funciones/Ayuda.txt");
+        if (!Desktop.isDesktopSupported()) {
+            ventanaError.verificarError("Error Lectura");
+            return;
+        }
+        Desktop escritorio = Desktop.getDesktop();
+        try {
+            escritorio.open(file);
+        }catch (IOException e){
+            ventanaError.verificarError("Error Lectura");
+        }
     }
 
 }
