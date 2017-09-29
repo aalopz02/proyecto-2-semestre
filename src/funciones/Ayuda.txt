@@ -34,4 +34,4 @@ e) Eliminar un archivo o característica.
 Dar click derecho sobre el objeto a eliminar y seleccionar eliminar.
 Solo se pueden eliminar características que no son requeridas.
 f) Buscar una característica.
-Para buscar un dato digite el nombre de la característca a buscar y se desplegará en la tabla.
+Para buscar un dato digite el nombre de la llave a buscar y se desplegará en la tabla.

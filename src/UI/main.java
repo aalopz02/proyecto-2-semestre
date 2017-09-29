@@ -34,7 +34,7 @@ import UI.uiController.cellFactory;
 public class main extends Application {
 
     private static VBox ventana = new VBox();
-    private TableView<Void> tablaModificar;
+    private static TableView<Void> tablaModificar;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -49,14 +49,14 @@ public class main extends Application {
         crearArbolDocumentos(grid);
         crearVentanaCambios(grid);
         crearBotonGuardar(grid,tablaModificar);
-        crearMenus(root);
+        crearMenus(root,grid);
         root.setCenter(grid);
         primaryStage.getIcons().add(icono);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-    private void crearArbolDocumentos(GridPane grid){
+    protected static void crearArbolDocumentos(GridPane grid){
         tablaModificar = crearTabla(grid);
         TreeItem<String> rootArchivo = new TreeItem<>("Archivos");
         rootArchivo.setExpanded(false);
@@ -97,13 +97,13 @@ public class main extends Application {
 
     }
 
-    private void crearMenus(BorderPane root){
+    private void crearMenus(BorderPane root, GridPane grid){
         MenuBar menuArriba = new MenuBar();
         Menu menuArchivo = new Menu("Archivo");
         MenuItem subMenuSalvar = new MenuItem("Salvar");
         subMenuSalvar.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.SHORTCUT_DOWN));
         subMenuSalvar.setOnAction(action ->
-                uiController.realizarCambiosTabla(tablaModificar)
+                uiController.realizarCambiosTabla(tablaModificar,grid)
         );
         MenuItem subMenuSalir = new MenuItem( "Salir");
         subMenuSalir.setAccelerator(new KeyCodeCombination(KeyCode.F4, KeyCombination.ALT_DOWN));
@@ -117,7 +117,7 @@ public class main extends Application {
         root.setTop(menuArriba);
     }
 
-    private TableView crearTabla(GridPane grid){
+    private static TableView crearTabla(GridPane grid){
         TableView<cellFactory> tablaModificar = new TableView<>();
         tablaModificar.setEditable(true);
         tablaModificar.setPlaceholder(new javafx.scene.control.Label(""));
@@ -174,7 +174,7 @@ public class main extends Application {
         return tablaModificar;
     }
 
-    private ContextMenu crearContextMenu(TreeView<String> tree, TableView<Void> tablaModificar){
+    private static ContextMenu crearContextMenu(TreeView<String> tree, TableView<Void> tablaModificar){
 
         ContextMenu contextMenu = new ContextMenu();
         MenuItem subMenuModificar = new MenuItem( "Modificar");
@@ -202,13 +202,20 @@ public class main extends Application {
             @Override
             public void handle(MouseEvent event) {
                 crearEtiquetasCambios("Todos los cambios fueron realizados");
-                uiController.realizarCambiosTabla(tablaModificar);
+                uiController.realizarCambiosTabla(tablaModificar,grid);
             }
         });
         buscar.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override
             public void handle(MouseEvent event) {
-                System.out.println(contenedor.getChildren());
+                String texto = entrada.getText();
+                if (!texto.equals("")) {
+                    uiController.buscar(texto,tablaModificar);
+
+                }
+                else{
+                    ventanaError.verificarError("Digite el dato a buscar");
+                }
             }
         });
         buscar.setGraphic(new ImageView(lupa));

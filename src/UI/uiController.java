@@ -8,8 +8,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
+import funciones.leerIniciales;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -236,7 +237,7 @@ public class uiController {
 
     }
 
-    protected static void realizarCambiosTabla(TableView<Void> tablaModificar){
+    protected static void realizarCambiosTabla(TableView<Void> tablaModificar, GridPane grid){
         for(int i = 0; i < listaTabla.size(); i++){
             cellFactory objeto = (cellFactory) listaTabla.get(i);
             crearJson listaJson = new crearJson();
@@ -253,6 +254,7 @@ public class uiController {
             indice.add(i);
             archivo.escribirArchivo(objeto.getNomArchivo(),listaJson,indice);
         }
+        main.crearArbolDocumentos(grid);
         listaTabla.removeAll(listaTabla);
         main.crearEtiquetasCambios("Se realizó el guardado de los cambios a los documentos");
     }
@@ -260,15 +262,43 @@ public class uiController {
     protected static void abrirTexto() {
         File file = new File("./src/funciones/Ayuda.txt");
         if (!Desktop.isDesktopSupported()) {
-            ventanaError.verificarError("Error Lectura");
+            ventanaError.crearVentana(new Stage(),"Error Lectura");
             return;
         }
         Desktop escritorio = Desktop.getDesktop();
         try {
             escritorio.open(file);
         }catch (IOException e){
-            ventanaError.verificarError("Error Lectura");
+            ventanaError.crearVentana(new Stage(),"Error Lectura");
         }
     }
+
+    protected static void buscar(String busqueda, TableView<Void> tablaModificar){
+        leerIniciales archivos = new leerIniciales();
+        ArrayList<String> listaArchivos = (ArrayList<String>) archivos.leerArchivos();
+        leerJson lecturaJson = new leerJson();
+        for (int i = 0;i < listaArchivos.size();i++){
+            String nomArchivo = listaArchivos.get(i).toString().replace(".json","");
+            for (int j = 0; j<lecturaJson.leerNombres(nomArchivo).size(); j++){
+                if(busqueda.equals(lecturaJson.leerLlave(nomArchivo,j).toString().replace("[","").replace("]",""))){
+                    cellFactory datos1 = new cellFactory(
+                            nomArchivo, lecturaJson.leerLlave(nomArchivo, j).toString().replace("[","").replace("]",""),
+                            lecturaJson.leerCaracteristicas(nomArchivo, j), lecturaJson.leerTipo(nomArchivo, j), lecturaJson.leerRequerido(nomArchivo.toString(), j),
+                            lecturaJson.leerTipoLlave(nomArchivo, j)
+                    );
+                    listaTabla.add(datos1);
+                    tablaModificar.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("nomArchivo"));
+                    tablaModificar.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("caracteristica"));
+                    tablaModificar.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("tipo"));
+                    tablaModificar.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("dato"));
+                    tablaModificar.setItems(listaTabla);
+
+                    return;
+                }
+            }
+        }
+        ventanaError.crearVentana(new Stage(),"Error buscar");
+    }
+
 
 }

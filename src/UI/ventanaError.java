@@ -49,6 +49,7 @@ public class ventanaError {
         if (error.equals("Archivo Eliminado")){texto = "El archivo fue eliminado";}
         if (error.equals("El Archivo Vacio Fue Eliminado")){texto = "Se eliminó la última\n" + "característica de un documento";}
         if (error.equals("Dato es Requerido")){texto = "El dato que se quiere eliminar es requerido";}
+        if (error.equals("Error buscar")){texto = "El nombre de llave especificado\n" + "no se encuentra";}
         etiqueta.setText(texto);
         etiqueta.setTextAlignment(TextAlignment.CENTER);
 

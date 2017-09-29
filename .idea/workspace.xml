@@ -7,11 +7,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df6033be-4398-4f6e-b653-790806733f70" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/proyecto/UI/uiController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/datos/datos.json" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/proyecto/proyecto.jar" afterPath="$PROJECT_DIR$/out/artifacts/proyecto/proyecto.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/proyecto/UI/main.class" afterPath="$PROJECT_DIR$/out/production/proyecto/UI/main.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/proyecto/UI/uiController.class" afterPath="$PROJECT_DIR$/out/production/proyecto/UI/uiController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/Andres.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/Andres.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/proyecto/proyecto.jnlp" afterPath="$PROJECT_DIR$/out/artifacts/proyecto/proyecto.jnlp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/UI/main.java" afterPath="$PROJECT_DIR$/src/UI/main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/UI/uiController.java" afterPath="$PROJECT_DIR$/src/UI/uiController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/UI/ventanaError.java" afterPath="$PROJECT_DIR$/src/UI/ventanaError.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/funciones/Ayuda.txt" afterPath="$PROJECT_DIR$/src/funciones/Ayuda.txt" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,11 +29,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/UI/main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-535">
-              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+            <state relative-caret-position="113">
+              <caret line="58" column="61" lean-forward="false" selection-start-line="58" selection-start-column="61" selection-end-line="58" selection-end-column="61" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#start#0;class#main#0" expanded="false" />
@@ -37,6 +43,8 @@
                 <element signature="method#crearTabla#0;class#main#0" expanded="false" />
                 <element signature="method#crearContextMenu#0;class#main#0" expanded="false" />
                 <element signature="method#crearBotonGuardar#0;class#main#0" expanded="false" />
+                <element signature="class#9490:9765" expanded="false" />
+                <element signature="class#9805:10218" expanded="false" />
                 <element signature="method#crearVentanaCambios#0;class#main#0" expanded="false" />
                 <element signature="method#crearEtiquetasCambios#0;class#main#0" expanded="false" />
               </folding>
@@ -44,32 +52,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="uiController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/UI/uiController.java">
+      <file leaf-file-name="Documento.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/datos/Documento.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="104">
-              <caret line="263" column="19" lean-forward="true" selection-start-line="263" selection-start-column="19" selection-end-line="263" selection-end-column="19" />
-              <folding>
-                <element signature="class#cellFactory#0;class#uiController#0" expanded="false" />
-                <element signature="method#agregarValorTabla#0;class#uiController#0" expanded="false" />
-                <element signature="method#eliminarValor#0;class#uiController#0" expanded="false" />
-                <element signature="e#9757#9765#0" expanded="true" />
-                <element signature="e#9838#9846#0" expanded="true" />
-                <element signature="method#realizarCambiosTabla#0;class#uiController#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ventanaError.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/UI/ventanaError.java">
+      <file leaf-file-name="uiController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/UI/uiController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
-              <caret line="31" column="36" lean-forward="true" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="37" />
+            <state relative-caret-position="382">
+              <caret line="261" column="39" lean-forward="false" selection-start-line="261" selection-start-column="39" selection-end-line="261" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#ventanaNombreArchivo#0;class#ventanaError#0" expanded="false" />
-                <element signature="method#ventanaTipoLlave#0;class#ventanaError#0" expanded="false" />
+                <element signature="class#cellFactory#0;class#uiController#0" expanded="false" />
+                <element signature="method#cellFactory#0;class#cellFactory#0;class#uiController#0" expanded="false" />
+                <element signature="method#agregarValorTabla#0;class#uiController#0" expanded="false" />
+                <element signature="method#eliminarValor#0;class#uiController#0" expanded="false" />
+                <element signature="method#nuevoValor#0;class#uiController#0" expanded="false" />
+                <element signature="method#realizarCambiosTabla#0;class#uiController#0" expanded="false" />
+                <element signature="method#abrirTexto#0;class#uiController#0" expanded="false" />
+                <element signature="method#buscar#0;class#uiController#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -136,8 +143,9 @@
         <option value="$PROJECT_DIR$/src/funciones/escribirJson.java" />
         <option value="$PROJECT_DIR$/src/datos/doc.json" />
         <option value="$PROJECT_DIR$/src/datos/peeeeeepooo.json" />
-        <option value="$PROJECT_DIR$/src/UI/ventanaError.java" />
+        <option value="$PROJECT_DIR$/src/datos/datos.json" />
         <option value="$PROJECT_DIR$/src/UI/main.java" />
+        <option value="$PROJECT_DIR$/src/UI/ventanaError.java" />
         <option value="$PROJECT_DIR$/src/UI/uiController.java" />
       </list>
     </option>
@@ -149,7 +157,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
+    <option name="x" value="1497" />
+    <option name="y" value="-113" />
     <option name="width" value="1382" />
     <option name="height" value="744" />
   </component>
@@ -171,10 +180,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="AndroidView" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -219,6 +227,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -488,7 +497,8 @@
       <workItem from="1506035131204" duration="7963000" />
       <workItem from="1506183526291" duration="10625000" />
       <workItem from="1506304917558" duration="5951000" />
-      <workItem from="1506433040362" duration="2519000" />
+      <workItem from="1506433040362" duration="8261000" />
+      <workItem from="1506649131775" duration="922000" />
     </task>
     <task id="LOCAL-00001" summary="crearJson listo">
       <created>1502411874332</created>
@@ -728,14 +738,21 @@
       <option name="project" value="LOCAL" />
       <updated>1506310828116</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="comprobaciones listas, falta terminar funcion de buscar">
+      <created>1506435850259</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1506435850259</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="177459000" />
+    <option name="totallyTimeSpent" value="184123000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="1358" y="-148" width="1296" height="1000" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -747,11 +764,11 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37864077" sideWeight="0.50292826" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3280757" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30441642" sideWeight="0.49707174" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30337077" sideWeight="0.49707174" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35065886" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -834,13 +851,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/funciones/leerIniciales.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="10" column="32" lean-forward="false" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/datos/Persona.json" />
     <entry file="file://$PROJECT_DIR$/src/UI/uiController.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -857,13 +867,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/UI/ui.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
         </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/UI/uiController.java">
@@ -881,13 +891,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/UI/ui.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
         </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/UI/uiController.java">
@@ -949,16 +959,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/UI/ui.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="41" lean-forward="false" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/lang/Void.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="124">
@@ -1007,54 +1007,7 @@
         <state relative-caret-position="56">
           <caret line="30" column="13" lean-forward="false" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/datos/datos.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="77" lean-forward="false" selection-start-line="0" selection-start-column="77" selection-end-line="0" selection-end-column="77" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/funciones/leerIniciales.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="9" column="33" lean-forward="false" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/UI/main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-535">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#start#0;class#main#0" expanded="false" />
-            <element signature="method#crearArbolDocumentos#0;class#main#0" expanded="false" />
-            <element signature="method#crearEtiquetas#0;class#main#0" expanded="false" />
-            <element signature="method#crearMenus#0;class#main#0" expanded="false" />
-            <element signature="method#crearTabla#0;class#main#0" expanded="false" />
-            <element signature="method#crearContextMenu#0;class#main#0" expanded="false" />
-            <element signature="method#crearBotonGuardar#0;class#main#0" expanded="false" />
-            <element signature="method#crearVentanaCambios#0;class#main#0" expanded="false" />
-            <element signature="method#crearEtiquetasCambios#0;class#main#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/UI/ventanaError.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="31" column="36" lean-forward="true" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#ventanaNombreArchivo#0;class#ventanaError#0" expanded="false" />
-            <element signature="method#ventanaTipoLlave#0;class#ventanaError#0" expanded="false" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1067,17 +1020,83 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/funciones/leerIniciales.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="9" column="47" lean-forward="false" selection-start-line="9" selection-start-column="47" selection-end-line="9" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/ui.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="41" lean-forward="false" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/datos/datos.json" />
+    <entry file="file://$PROJECT_DIR$/src/UI/ventanaError.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="40" column="32" lean-forward="false" selection-start-line="40" selection-start-column="32" selection-end-line="40" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#crearVentana#0;class#ventanaError#0" expanded="false" />
+            <element signature="method#verificarError#0;class#ventanaError#0" expanded="false" />
+            <element signature="method#ventanaNombreArchivo#0;class#ventanaError#0" expanded="false" />
+            <element signature="method#ventanaTipoLlave#0;class#ventanaError#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/UI/uiController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="263" column="19" lean-forward="true" selection-start-line="263" selection-start-column="19" selection-end-line="263" selection-end-column="19" />
+        <state relative-caret-position="382">
+          <caret line="261" column="39" lean-forward="false" selection-start-line="261" selection-start-column="39" selection-end-line="261" selection-end-column="39" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="class#cellFactory#0;class#uiController#0" expanded="false" />
+            <element signature="method#cellFactory#0;class#cellFactory#0;class#uiController#0" expanded="false" />
             <element signature="method#agregarValorTabla#0;class#uiController#0" expanded="false" />
             <element signature="method#eliminarValor#0;class#uiController#0" expanded="false" />
-            <element signature="e#9757#9765#0" expanded="true" />
-            <element signature="e#9838#9846#0" expanded="true" />
+            <element signature="method#nuevoValor#0;class#uiController#0" expanded="false" />
             <element signature="method#realizarCambiosTabla#0;class#uiController#0" expanded="false" />
+            <element signature="method#abrirTexto#0;class#uiController#0" expanded="false" />
+            <element signature="method#buscar#0;class#uiController#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/datos/Documento.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="113">
+          <caret line="58" column="61" lean-forward="false" selection-start-line="58" selection-start-column="61" selection-end-line="58" selection-end-column="61" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#start#0;class#main#0" expanded="false" />
+            <element signature="method#crearArbolDocumentos#0;class#main#0" expanded="false" />
+            <element signature="method#crearEtiquetas#0;class#main#0" expanded="false" />
+            <element signature="method#crearMenus#0;class#main#0" expanded="false" />
+            <element signature="method#crearTabla#0;class#main#0" expanded="false" />
+            <element signature="method#crearContextMenu#0;class#main#0" expanded="false" />
+            <element signature="method#crearBotonGuardar#0;class#main#0" expanded="false" />
+            <element signature="class#9490:9765" expanded="false" />
+            <element signature="class#9805:10218" expanded="false" />
+            <element signature="method#crearVentanaCambios#0;class#main#0" expanded="false" />
+            <element signature="method#crearEtiquetasCambios#0;class#main#0" expanded="false" />
           </folding>
         </state>
       </provider>
